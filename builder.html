@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferilskrárgerð</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="header-logo-link">
+                <div class="header-logo">
+                    <svg class="logo-icon-large" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="7" width="30" height="36" rx="3" stroke="url(#gradient)" stroke-width="3" fill="white"/>
+                        <line x1="15" y1="15" x2="35" y2="15" stroke="url(#gradient)" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="15" y1="21" x2="30" y2="21" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="15" y1="26" x2="33" y2="26" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="15" y1="31" x2="28" y2="31" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="18" cy="37" r="2" fill="url(#gradient)"/>
+                        <circle cx="25" cy="37" r="2" fill="url(#gradient)"/>
+                        <circle cx="32" cy="37" r="2" fill="url(#gradient)"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#1abc9c"/>
+                                <stop offset="1" stop-color="#16a085"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </a>
+            <h1>Ferilskrágerð</h1>
+            <p>Búðu til ferilskrá fyrir starfsnám, vinnu og tækifæri</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Form Section -->
+            <div class="form-section">
+                <div class="autosave-indicator">
+                    <span id="autosaveStatus">✓ Sjálfvirk vistun virk</span>
+                    <span class="autosave-info">Framvindan þín er sjálfkrafa vistuð í vafranum</span>
+                </div>
+                <h2>Upplýsingarnar þínar</h2>
+                
+                <!-- Job Type Selection -->
+                <section class="form-group job-type-section">
+                    <h3>Hvaða tegund starfs ertu að leita að?</h3>
+                    <select id="jobType" class="job-type-select" onchange="updateFormForJobType()">
+                        <option value="general">Almennt (allar starfstegundir)</option>
+                        <optgroup label="── Árangurstörf ──">
+                            <option value="hospitality">Veitingaþjónusta (veitingahús, kaffihús, hótel)</option>
+                            <option value="trades">Iðnstarf (smíði, rafvirkjun, pípulagning, bílaviðgerðir)</option>
+                            <option value="office">Skrifstofustarf (stjórnun, bókhald, ritarastörf)</option>
+                            <option value="healthcare">Heilbrigðisþjónusta (hjúkrun, umönnun, líkamsrækt)</option>
+                            <option value="education">Kennsla/Uppeldi (kennarar, leiðbeinendur, dagvistun)</option>
+                            <option value="tech">Tækni/Forritun (hugbúnaður, vefsíðugerð, IT)</option>
+                            <option value="creative">Skapandi störf (hönnun, ljósmyndun, markaðssetning)</option>
+                            <option value="outdoor">Útivinna (garðyrkja, ferðaþjónusta, íþróttir)</option>
+                            <option value="labor">Líkamlegur vinna (vöruhúsastarf, flutningar, bygging)</option>
+                        </optgroup>
+                        <optgroup label="── 🎄 Árstíðabundin störf ──">
+                            <option value="christmas">🎄 Jólastarf (jólaverslun, pökkun, póstþjónusta)</option>
+                            <option value="summer">☀️ Sumarvinna (garðavinna, ferðaþjónusta, tjaldsvæði)</option>
+                            <option value="festival">🎪 Hátíðir & viðburðir (tónleikar, hátíðir, viðburðir)</option>
+                            <option value="harvest">🌾 Uppskerutími (berjatínsla, garðyrkja, landbúnaður)</option>
+                            <option value="winter">❄️ Vetrarvinna (skíðasvæði, snjómokstur, vetrarstarfsemi)</option>
+                        </optgroup>
+                    </select>
+                    <p class="job-type-hint" id="jobTypeHint">Veldu starfstegund til að fá sérsniðnar ábendingar og dæmi</p>
+                </section>
+                
+                <!-- Personal Information -->
+                <section class="form-group">
+                    <h3>Persónulegar upplýsingar</h3>
+                    <input type="text" id="fullName" placeholder="Fullt nafn *" required>
+                    <input type="text" id="title" placeholder="Hvaða starf ertu að leita að? (t.d. Starfsnám, Lífsbjarg, Verslunarmaður)">
+                    <input type="email" id="email" placeholder="Netfang *">
+                    <input type="tel" id="phone" placeholder="Símanúmer">
+                    <input type="text" id="location" placeholder="Staðsetning (Bær, Land)">
+                    <input type="text" id="availability" placeholder="Tiltæk/ur frá (t.d. Desember 2025 eða strax)">
+                    <input type="url" id="linkedin" placeholder="LinkedIn slóð (Valfrjálst)">
+                    <input type="url" id="website" placeholder="Vefsiða/safn (Valfrjálst)">
+                </section>
+
+                <!-- Professional Summary -->
+                <section class="form-group">
+                    <h3>Um þig</h3>
+                    <textarea id="summary" placeholder="Segjðu vinnuveitendum frá þér, markmiðum þínum, hvernig þú ert frábært umsagnarefni fyrir starfið, og hvað þú vonast til að læra eða ná..." rows="4"></textarea>
+                </section>
+
+                <!-- Work Experience -->
+                <section class="form-group">
+                    <h3>Starfsreynsla</h3>
+                    <div id="experienceContainer"></div>
+                    <button type="button" class="add-btn" onclick="addExperience()">+ Bæta við reynslu</button>
+                </section>
+
+                <!-- Education -->
+                <section class="form-group">
+                    <h3>Menntun</h3>
+                    <div id="educationContainer"></div>
+                    <button type="button" class="add-btn" onclick="addEducation()">+ Bæta við menntun</button>
+                </section>
+
+                <!-- Skills -->
+                <section class="form-group">
+                    <h3>Hæfni</h3>
+                    <textarea id="skills" placeholder="Skráðu hæfni þína aðskilin með kommum (t.d. Íslenska, Enska, Tölvukúnni, Lipaþætting)" rows="3"></textarea>
+                </section>
+
+                <!-- Languages -->
+                <section class="form-group">
+                    <h3>Tungumál</h3>
+                    <textarea id="languages" placeholder="Skráðu tungumál og kunnandi (t.d. Íslenska - Moruðmál, Enska - Fljótandi)" rows="2"></textarea>
+                </section>
+
+                <!-- Volunteer & Activities -->
+                <section class="form-group">
+                    <h3>Sjálfboðaliðastarf og starfsemi (Valfrjálst)</h3>
+                    <textarea id="volunteer" placeholder="Næfnu sjálfboðaliðastarf, skólafélög, íþróttalið, forystuhlutverk o.fl. (einn á hverri línu)" rows="3"></textarea>
+                </section>
+
+                <!-- Certifications -->
+                <section class="form-group">
+                    <h3>Vottanir og leyfi (Valfrjálst)</h3>
+                    <textarea id="certifications" placeholder="Okuleyfi, Fyrstu hjálp, Maðræðislausn o.fl. (einn á hverri línu)" rows="2"></textarea>
+                </section>
+
+                <div class="button-group">
+                    <button type="button" class="generate-btn" onclick="generateCV()">Búa til ferilskrá</button>
+                    <button type="button" class="save-btn" onclick="saveProgress()">💾 Vista framvindu</button>
+                    <button type="button" class="load-btn" onclick="loadProgress()">📂 Hlaða framvindu</button>
+                    <button type="button" class="clear-btn" onclick="clearForm()">Hreinsa eymsblub</button>
+                </div>
+                <p class="auto-save-status" id="autoSaveStatus">✓ Sjálfvirk vistun er virk</p>
+            </div>
+
+            <!-- CV Preview Section -->
+            <div class="preview-section">
+                <div class="preview-header">
+                    <h2>Forskoðun</h2>
+                    <button type="button" class="print-btn" onclick="printCV()">Prenta / Vista sem PDF</button>
+                </div>
+                
+                <div id="cvPreview" class="cv-preview">
+                    <div class="preview-placeholder">
+                        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 30h60M20 45h60M20 60h40M20 75h50" stroke="#ddd" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        <p>Ferilskráin þín mun birtast hér</p>
+                        <p class="small-text">Fylltu út eynsblub og smelltu á "Búa til ferilskrá"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Holiday Theme System
+        function getHolidayTheme() {
+            const now = new Date();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            
+            // Halloween: October 25-31
+            if (month === 10 && day >= 25) return 'halloween';
+            // Christmas: December 1-26
+            if (month === 12 && day >= 1 && day <= 26) return 'christmas';
+            // New Year's Eve: December 27 - January 2
+            if ((month === 12 && day >= 27) || (month === 1 && day <= 2)) return 'newyear';
+            
+            return 'default';
+        }
+
+        function applyHolidayTheme() {
+            const theme = getHolidayTheme();
+            
+            if (theme === 'halloween') {
+                document.body.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)';
+                const title = document.querySelector('h1');
+                if (title && !title.textContent.includes('🎃')) {
+                    title.textContent += ' 🎃';
+                }
+            } 
+            else if (theme === 'christmas') {
+                document.body.style.background = 'linear-gradient(135deg, #165b33 0%, #c41e3a 100%)';
+                const title = document.querySelector('h1');
+                if (title && !title.textContent.includes('🎄')) {
+                    title.textContent += ' 🎄';
+                }
+                addSnowEffect();
+            }
+            else if (theme === 'newyear') {
+                document.body.style.background = 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)';
+                const title = document.querySelector('h1');
+                if (title && !title.textContent.includes('🎆')) {
+                    title.textContent += ' 🎆';
+                }
+                addSparkleEffect();
+            }
+        }
+
+        function addSnowEffect() {
+            let snowContainer = document.getElementById('snow-container');
+            if (!snowContainer) {
+                snowContainer = document.createElement('div');
+                snowContainer.id = 'snow-container';
+                snowContainer.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    pointer-events: none; z-index: 9999; overflow: hidden;
+                `;
+                document.body.appendChild(snowContainer);
+                
+                for (let i = 0; i < 50; i++) {
+                    const snowflake = document.createElement('div');
+                    snowflake.innerHTML = '❄️';
+                    snowflake.style.cssText = `
+                        position: absolute; top: -20px; left: ${Math.random() * 100}%;
+                        font-size: ${Math.random() * 10 + 10}px;
+                        opacity: ${Math.random() * 0.6 + 0.3};
+                        animation: snowfall ${Math.random() * 3 + 5}s linear infinite;
+                        animation-delay: ${Math.random() * 5}s;
+                    `;
+                    snowContainer.appendChild(snowflake);
+                }
+                
+                const style = document.createElement('style');
+                style.textContent = `@keyframes snowfall { to { transform: translateY(100vh) rotate(360deg); } }`;
+                document.head.appendChild(style);
+            }
+        }
+
+        function addSparkleEffect() {
+            let sparkleContainer = document.getElementById('sparkle-container');
+            if (!sparkleContainer) {
+                sparkleContainer = document.createElement('div');
+                sparkleContainer.id = 'sparkle-container';
+                sparkleContainer.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    pointer-events: none; z-index: 9999; overflow: hidden;
+                `;
+                document.body.appendChild(sparkleContainer);
+                
+                setInterval(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.innerHTML = '✨';
+                    sparkle.style.cssText = `
+                        position: absolute;
+                        top: ${Math.random() * 100}%; left: ${Math.random() * 100}%;
+                        font-size: ${Math.random() * 20 + 15}px;
+                        animation: sparkle 2s ease-out forwards;
+                    `;
+                    sparkleContainer.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 2000);
+                }, 300);
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes sparkle {
+                        0% { opacity: 0; transform: scale(0) rotate(0deg); }
+                        50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+                        100% { opacity: 0; transform: scale(0) rotate(360deg); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Apply theme on load
+        window.addEventListener('DOMContentLoaded', applyHolidayTheme);
+    </script>
+</body>
+</html>
