@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .language-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 10000;
+        }
+        .lang-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+        .lang-btn.active {
+            background: #1abc9c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">Test Page</h1>
+    
+    <div class="language-toggle">
+        <button class="lang-btn active" data-lang="is">IS 🇮🇸</button>
+        <button class="lang-btn" data-lang="en">EN 🇬🇧</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            const buttons = document.querySelectorAll('.lang-btn');
+            console.log('Found buttons:', buttons.length);
+            
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    console.log('Clicked:', this.dataset.lang);
+                    buttons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (this.dataset.lang === 'is') {
+                        document.body.style.background = 'lightblue';
+                        document.getElementById('title').textContent = 'Íslenska';
+                    } else {
+                        document.body.style.background = 'lightcoral';
+                        document.getElementById('title').textContent = 'English';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

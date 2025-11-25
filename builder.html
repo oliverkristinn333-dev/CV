@@ -80,6 +80,22 @@
                     <input type="text" id="availability" placeholder="Tiltæk/ur frá (t.d. Desember 2025 eða strax)">
                     <input type="url" id="linkedin" placeholder="LinkedIn slóð (Valfrjálst)">
                     <input type="url" id="website" placeholder="Vefsiða/safn (Valfrjálst)">
+                    <!-- Photo upload (optional) -->
+                    <div class="photo-upload-section">
+                        <label class="photo-upload-label">📷 Mynd af þér (Valfrjálst)</label>
+                        <p class="photo-upload-hint">Bættu við faglegri mynd til að gera ferilskrána persónulegri</p>
+                        <div class="photo-upload-area" id="photoUploadArea">
+                            <input type="file" id="photoInput" accept="image/*" class="photo-input-hidden">
+                            <div id="photoPlaceholder" class="photo-placeholder">
+                                <span class="photo-icon">📷</span>
+                                <span class="photo-text">Smelltu til að velja mynd</span>
+                            </div>
+                            <div id="photoPreviewContainer" class="photo-preview-container" style="display:none;">
+                                <img id="photoPreview" src="" alt="Forskoðun myndar">
+                                <button type="button" id="removePhotoBtn" class="remove-photo-btn" onclick="removePhoto()">✕</button>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <!-- Professional Summary -->

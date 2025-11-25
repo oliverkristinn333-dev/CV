@@ -41,6 +41,7 @@ function collectFormData() {
         languages: document.getElementById('languages')?.value || '',
         volunteer: document.getElementById('volunteer')?.value || '',
         certifications: document.getElementById('certifications')?.value || '',
+        photoDataUrl: localStorage.getItem('cv_photo') || '',
         experiences: [],
         education: [],
         experienceCount: experienceCount,
@@ -80,6 +81,70 @@ function collectFormData() {
     }
     
     return data;
+}
+
+// Photo handling
+document.addEventListener('DOMContentLoaded', () => {
+    const photoInput = document.getElementById('photoInput');
+    const photoPreview = document.getElementById('photoPreview');
+    const photoPreviewContainer = document.getElementById('photoPreviewContainer');
+    const photoPlaceholder = document.getElementById('photoPlaceholder');
+
+    if (photoInput) {
+        photoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const dataUrl = evt.target.result;
+                showPhotoPreview(dataUrl);
+                // store in localStorage for autosave/restore
+                try { localStorage.setItem('cv_photo', dataUrl); } catch (err) { console.warn('Could not store photo in localStorage', err); }
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // Load stored photo if present
+    const stored = localStorage.getItem('cv_photo');
+    if (stored) {
+        showPhotoPreview(stored);
+    }
+});
+
+function showPhotoPreview(dataUrl) {
+    const photoPreview = document.getElementById('photoPreview');
+    const photoPreviewContainer = document.getElementById('photoPreviewContainer');
+    const photoPlaceholder = document.getElementById('photoPlaceholder');
+    
+    if (photoPreview) {
+        photoPreview.src = dataUrl;
+    }
+    if (photoPreviewContainer) {
+        photoPreviewContainer.style.display = 'inline-block';
+    }
+    if (photoPlaceholder) {
+        photoPlaceholder.style.display = 'none';
+    }
+}
+
+function removePhoto() {
+    const photoPreview = document.getElementById('photoPreview');
+    const photoPreviewContainer = document.getElementById('photoPreviewContainer');
+    const photoPlaceholder = document.getElementById('photoPlaceholder');
+    const photoInput = document.getElementById('photoInput');
+    
+    if (photoPreview) {
+        photoPreview.src = '';
+    }
+    if (photoPreviewContainer) {
+        photoPreviewContainer.style.display = 'none';
+    }
+    if (photoPlaceholder) {
+        photoPlaceholder.style.display = 'flex';
+    }
+    if (photoInput) photoInput.value = '';
+    try { localStorage.removeItem('cv_photo'); } catch (err) { console.warn('Could not remove photo from localStorage', err); }
 }
 
 // Save progress manually
@@ -410,7 +475,14 @@ function generateCV() {
     
     // Header
     cvHTML += '<div class="cv-header">';
+    cvHTML += '<div class="cv-header-top">';
+    // include photo if available
+    const storedPhoto = localStorage.getItem('cv_photo') || '';
+    if (storedPhoto) {
+        cvHTML += `<div class="cv-photo"><img src="${storedPhoto}" alt="${escapeHtml(fullName)}"/></div>`;
+    }
     cvHTML += `<h1 class="cv-name">${escapeHtml(fullName)}</h1>`;
+    cvHTML += '</div>';
     if (title) {
         cvHTML += `<p class="cv-title">${escapeHtml(title)}</p>`;
     }
