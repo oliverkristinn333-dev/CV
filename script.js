@@ -407,8 +407,8 @@ function addExperience() {
         <input type="text" id="company-${experienceCount}" placeholder="Fyrirtækisheiti *">
         <input type="text" id="jobLocation-${experienceCount}" placeholder="Staðsetning">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <input type="text" id="startDate-${experienceCount}" placeholder="Byrjunardagur (t.d. Jan 2020)">
-            <input type="text" id="endDate-${experienceCount}" placeholder="Lokadagur (t.d. Des 2022 eða Núna)">
+            <input type="text" id="startDate-${experienceCount}" placeholder="Byrjunardagur (t.d. Ágú 2023)">
+            <input type="text" id="endDate-${experienceCount}" placeholder="Lokadagur (t.d. Nóv 2025 eða Núna)">
         </div>
         <textarea id="jobDescription-${experienceCount}" placeholder="Starfslýsing og árangur..." rows="3"></textarea>
     `;
