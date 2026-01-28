@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferilskrárgerð - Búðu til faglega ferilskrá</title>
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button class="lang-btn active" data-lang="is" onclick="switchLanguage('is')">
+            <img src="https://flagcdn.com/24x18/is.png" alt="Iceland" class="lang-flag">
+            IS
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">
+            <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="lang-flag">
+            EN
+        </button>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="6" width="24" height="28" rx="2" stroke="url(#gradient)" stroke-width="2.5" fill="white"/>
+                        <line x1="12" y1="12" x2="28" y2="12" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="12" y1="17" x2="24" y2="17" stroke="url(#gradient)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="12" y1="21" x2="26" y2="21" stroke="url(#gradient)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="12" y1="25" x2="22" y2="25" stroke="url(#gradient)" stroke-width="1.5" stroke-linecap="round"/>
+                        <circle cx="15" cy="29" r="1.5" fill="url(#gradient)"/>
+                        <circle cx="20" cy="29" r="1.5" fill="url(#gradient)"/>
+                        <circle cx="25" cy="29" r="1.5" fill="url(#gradient)"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#1abc9c"/>
+                                <stop offset="1" stop-color="#16a085"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">Ferilskrágerð</span>
+                </div>
+            </a>
+            <div class="nav-menu">
+                <a href="#" class="nav-link">Heim</a>
+                <a href="#features" class="nav-link">Eiginleikar</a>
+                <a href="#how-it-works" class="nav-link">Hvernig virkar þetta</a>
+                <a href="#tips" class="nav-link">Ráð</a>
+                <a href="#about" class="nav-link">Um okkur</a>
+                <a href="#faq" class="nav-link">Algengar spurningar</a>
+                <a href="handball-tournament.html" class="nav-link">Handball</a>
+                <a href="builder.html" class="nav-btn">Byrja að búa til</a>
+            </div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#" class="mobile-nav-link" onclick="toggleMobileMenu()">Heim</a>
+            <a href="#features" class="mobile-nav-link" onclick="toggleMobileMenu()">Eiginleikar</a>
+            <a href="#how-it-works" class="mobile-nav-link" onclick="toggleMobileMenu()">Hvernig virkar þetta</a>
+            <a href="#tips" class="mobile-nav-link" onclick="toggleMobileMenu()">Ráð</a>
+            <a href="#about" class="mobile-nav-link" onclick="toggleMobileMenu()">Um okkur</a>
+            <a href="#faq" class="mobile-nav-link" onclick="toggleMobileMenu()">Algengar spurningar</a>
+            <a href="handball-tournament.html" class="mobile-nav-link" onclick="toggleMobileMenu()">Handball</a>
+            <a href="builder.html" class="mobile-nav-link nav-btn-mobile" onclick="toggleMobileMenu()">Byrja að búa til</a>
+        </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Búðu til þína faglegu ferilskrá</h1>
+            <p class="hero-subtitle">Búðu til glæsilega ferilskrá fyrir starfsnám, vinnu og tækifæri. Fullkomið fyrir nemendur og þá sem eru að leita að starfi.</p>
+            <div class="hero-buttons">
+                <a href="builder.html" class="btn btn-primary">Byrja að búa til</a>
+                <a href="#features" class="btn btn-secondary">Læra meira</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="cv-mockup">
+                <div class="mockup-header"></div>
+                <div class="mockup-line long"></div>
+                <div class="mockup-line medium"></div>
+                <div class="mockup-line short"></div>
+                <div class="mockup-section"></div>
+                <div class="mockup-line long"></div>
+                <div class="mockup-line medium"></div>
+                <div class="mockup-line long"></div>
+                <div class="mockup-section"></div>
+                <div class="mockup-tags">
+                    <div class="mockup-tag"></div>
+                    <div class="mockup-tag"></div>
+                    <div class="mockup-tag"></div>
+                    <div class="mockup-tag"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Hvað er ferilskrá og hvers vegna þarftu hana?</h2>
+            <div class="info-section">
+                <p class="info-text">
+                    <strong>Ferilskrá (CV)</strong> er skjal sem sýnir menntun þína, starfsreynslu, hæfni og árangur. 
+                    Þetta er fyrsta skrefið í umsóknarferlinu og oft það sem ákvarðar hvort þú færð viðtal eða ekki. 
+                    Góð ferilskrá getur gert mikinn mun þegar þú sækir um starf, starfsnám eða tækifæri!
+                </p>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 3rem;">Af hverju að velja okkar ferilskrágerð?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Hratt og auðvelt</h3>
+                    <p>Búðu til faglega ferilskrá á nokkrum mínútum með einföldu viðmóti</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Fagleg útlit</h3>
+                    <p>Fáðu hreint, nútímalegt útlit sem vekur athygli vinnuveitenda</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Virkar í síma</h3>
+                    <p>Búðu til og breyttu ferilskránni á hvaða tæki sem er, hvar sem er</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Prenta og vista</h3>
+                    <p>Vistaðu ferilskránna sem PDF eða prentaðu beint úr vafranum</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% persónuvernd</h3>
+                    <p>Öll gögn eru geymd í vafranum þínum - engin aðgangur, engin vöktun</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🆓</div>
+                    <h3>Alveg ókeypis</h3>
+                    <p>Engin falin gjöld, engin áskrift - bara búðu til ferilskrána ókeypis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Hvernig virkar þetta</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Fylltu út upplýsingar</h3>
+                    <p>Skráðu persónulegar upplýsingar, starfsreynslu, menntun og hæfni</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Sjáðu forskoðun</h3>
+                    <p>Fylgstu með ferilskránni breytast í rauntíma þegar þú fyllir út</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Hlaða niður</h3>
+                    <p>Prentaðu eða vistaðu ferilskrána sem PDF og byrjaðu að sækja um störf</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tips-section" id="tips">
+        <div class="container">
+            <h2 class="section-title">Góð ráð fyrir frábæra ferilskrá</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">✏️</div>
+                    <h3>Vertu nákvæmur</h3>
+                    <p>Forðastu stafsetningarvillur og gakktu úr skugga um að allar upplýsingar séu réttar. Láttu annan lesa yfir áður en þú sendir inn.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🎯</div>
+                    <h3>Sérsníðu fyrir hvert starf</h3>
+                    <p>Lagaðu ferilskrána að því starfi sem þú sækir um. Leggðu áherslu á þá reynslu og hæfni sem skiptir mestu máli fyrir það tiltekna starf.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">💪</div>
+                    <h3>Áhersla á árangur</h3>
+                    <p>Í stað þess að segja bara "vann í verslun", segðu "þjónaði 50+ viðskiptavinum á dag og jók sölu um 15%".</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">📝</div>
+                    <h3>Haltu því stuttu</h3>
+                    <p>Ein til tvær síður eru fullnægjandi fyrir flest störf. Atvinnurekendur hafa ekki tíma til að lesa langar ferilskrár.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🌟</div>
+                    <h3>Byrjaðu sterkt</h3>
+                    <p>Skrifaðu sterka kynningu efst sem útskýrir hver þú ert og hvað þú hefur að bjóða. Þetta er fyrsta það sem atvinnurekandi sér.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">📧</div>
+                    <h3>Fagleg samskipti</h3>
+                    <p>Notaðu faglegt netfang (t.d. nafn.nafnsson@gmail.com) og gakktu úr skugga um að símanúmerið þitt sé rétt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="section-title">Um ferilskrágerðina</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>🎓 Sérstaklega hannað fyrir nemendur og unga starfsfólk</h3>
+                    <p>
+                        Við skiljum að það getur verið erfitt að búa til sína fyrstu ferilskrá, sérstaklega þegar þú hefur litla sem enga starfsreynslu. 
+                        Þess vegna höfum við hannað þetta verkfæri með það í huga að hjálpa ungmennum að skapa faglega ferilskrá sem leggur áherslu 
+                        á menntun, sjálfboðavinnu, íþróttir og aðra starfsemi sem sýnir hæfni þína.
+                    </p>
+                </div>
+                <div class="about-text">
+                    <h3>🔒 100% ókeypis og einkamál</h3>
+                    <p>
+                        Engin skráning nauðsynleg, engin kreditkort, engar falin gjöld. Allar upplýsingar eru geymdar í vafranum þínum 
+                        og við geymum ekkert. Þú átt öll þín gögn og getur búið til eins margar ferilskrár og þú vilt - algjörlega ókeypis.
+                    </p>
+                </div>
+                <div class="about-text">
+                    <h3>💼 11 mismunandi starfstegundir</h3>
+                    <p>
+                        Hvort sem þú ert að leita að verslunarstarfi, vinnu á veitingastað, iðnstarfi eða tæknistarfi - við höfum sérsniðnar 
+                        tillögur og dæmi fyrir hverja starfstegund. Veldu bara það sem hentar þér best og við hjálpum þér að fylla út réttar upplýsingar.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="partnership-section">
+                <h2 class="section-title" style="margin-top: 3rem;">🤝 Í samstarfi við Tækniskólann</h2>
+                <div class="partnership-content">
+                    <a href="https://tskoli.is" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                        <img src="https://tskoli.is/wp-content/uploads/2018/07/ts-logo.svg" alt="Tækniskólinn logo" class="partner-logo">
+                    </a>
+                    <div class="partnership-text">
+                        <p>
+                            Þessi ferilskrágerð er búin til í samstarfi við <strong>Tækniskólann</strong> til að hjálpa nemendum að undirbúa sig 
+                            fyrir atvinnulífið. Tækniskólinn er stærsti framhaldsskóli landsins með yfir 2.500 nemendur í iðn- og tæknifögum.
+                        </p>
+                        <p>
+                            Nemendur Tækniskólans og allir aðrir geta nýtt sér þetta ókeypis verkfæri til að búa til faglegar ferilskrár 
+                            fyrir starfsnám, vinnu eða fyrsta starfið. Góð ferilskrá er mikilvægt skref til að tryggja sér tækifæri 
+                            í atvinnulífinu.
+                        </p>
+                        <a href="https://tskoli.is" target="_blank" rel="noopener noreferrer" class="partner-link">
+                            Heimsækja Tækniskólann →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">Algengar spurningar</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>❓ Hvað ef ég hef aldrei unnið áður?</h3>
+                    <p>Það er alveg í lagi! Leggðu áherslu á menntun þína, sjálfboðavinnu, íþróttir, skólaverkefni og aðra hæfni. 
+                    Allir byrja einhvers staðar og margar hæfni frá skóla og tómstundum geta verið mjög dýrmætar.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>❓ Hversu löng ætti ferilskrá að vera?</h3>
+                    <p>Fyrir fyrstu störf er ein síða oftast nóg. Það mikilvægasta er að hafa skýrar, 
+                    viðeigandi upplýsingar fremur en að fylla margar síður.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>❓ Get ég vistað og breytt síðar?</h3>
+                    <p>Upplýsingarnar eru geymdar í vafranum þínum, svo þú getur hlaðið síðuna aftur í sama vafra. 
+                    Við mælum samt með að þú prentir/vistar sem PDF þegar þú ert búin/n.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>❓ Er þetta virkilega ókeypis?</h3>
+                    <p>Já! Engin gjöld, engin áskrift, engin falin kostnaður. Verkfærið er algjörlega ókeypis að nota.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Tilbúinn að tryggja þér starf?</h2>
+            <p>Byrjaðu að búa til ferilskrána þína í dag og sæktu um störf, starfsnám og tækifæri með sjálfstrausti</p>
+            <a href="builder.html" class="btn btn-primary btn-large">Búa til ferilskrá núna</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-copyright">&copy; 2025 Ferilskrágerð</p>
+                <div class="footer-divider"></div>
+                <p class="footer-note">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: middle; margin-right: 6px;">
+                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                    </svg>
+                    Öll gögn eru geymd örugg í vafranum þínum
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global language switching function - must be defined first for onclick handlers
+        function switchLanguage(lang) {
+            console.log('switchLanguage called with:', lang);
+            
+            // Update active state on buttons
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            const activeBtn = document.querySelector(`.lang-btn[data-lang="${lang}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+            
+            // Update language content
+            if (typeof updateLanguage === 'function') {
+                updateLanguage(lang);
+            }
+        }
+        
+        // Holiday Theme System
+        function getHolidayTheme() {
+            const now = new Date();
+            const month = now.getMonth() + 1; // 1-12
+            const day = now.getDate();
+            
+            // Halloween: October 25-31
+            if (month === 10 && day >= 25) {
+                return 'halloween';
+            }
+            
+            // Christmas: December 1-26
+            if (month === 12 && day >= 1 && day <= 26) {
+                return 'christmas';
+            }
+            
+            // New Year's Eve: December 27 - January 2
+            if ((month === 12 && day >= 27) || (month === 1 && day <= 2)) {
+                return 'newyear';
+            }
+            
+            return 'default';
+        }
+
+        function applyHolidayTheme() {
+            const theme = getHolidayTheme();
+            const root = document.documentElement;
+            
+            if (theme === 'halloween') {
+                // Halloween theme - Orange and purple
+                root.style.setProperty('--primary-color', '#ff6b35');
+                root.style.setProperty('--secondary-color', '#6a0dad');
+                root.style.setProperty('--accent-color', '#ff9500');
+                document.body.style.background = 'linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #1a1a2e)';
+                document.querySelector('.navbar').style.background = 'rgba(26, 26, 46, 0.95)';
+                
+                // Add pumpkin emoji to logo
+                const logoText = document.querySelector('.logo-text');
+                if (logoText && !logoText.textContent.includes('🎃')) {
+                    logoText.textContent += ' 🎃';
+                }
+            } 
+            else if (theme === 'christmas') {
+                // Christmas theme - Red and green
+                root.style.setProperty('--primary-color', '#c41e3a');
+                root.style.setProperty('--secondary-color', '#165b33');
+                root.style.setProperty('--accent-color', '#ffd700');
+                document.body.style.background = 'linear-gradient(-45deg, #165b33, #0f4229, #c41e3a, #8b1a1a)';
+                document.querySelector('.navbar').style.background = 'rgba(20, 40, 30, 0.95)';
+                
+                // Add snowflake/tree emoji to logo
+                const logoText = document.querySelector('.logo-text');
+                if (logoText && !logoText.textContent.includes('🎄')) {
+                    logoText.textContent += ' 🎄';
+                }
+                
+                // Add snow effect
+                addSnowEffect();
+            }
+            else if (theme === 'newyear') {
+                // New Year theme - Gold and sparkle
+                root.style.setProperty('--primary-color', '#ffd700');
+                root.style.setProperty('--secondary-color', '#4169e1');
+                root.style.setProperty('--accent-color', '#ff69b4');
+                document.body.style.background = 'linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0f0c29)';
+                document.querySelector('.navbar').style.background = 'rgba(15, 12, 41, 0.95)';
+                
+                // Add fireworks emoji to logo
+                const logoText = document.querySelector('.logo-text');
+                if (logoText && !logoText.textContent.includes('🎆')) {
+                    logoText.textContent += ' 🎆';
+                }
+                
+                // Add sparkle effect
+                addSparkleEffect();
+            }
+        }
+
+        function addSnowEffect() {
+            // Create snow container
+            let snowContainer = document.getElementById('snow-container');
+            if (!snowContainer) {
+                snowContainer = document.createElement('div');
+                snowContainer.id = 'snow-container';
+                snowContainer.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    overflow: hidden;
+                `;
+                document.body.appendChild(snowContainer);
+                
+                // Create snowflakes
+                for (let i = 0; i < 50; i++) {
+                    const snowflake = document.createElement('div');
+                    snowflake.innerHTML = '❄️';
+                    snowflake.style.cssText = `
+                        position: absolute;
+                        top: -20px;
+                        left: ${Math.random() * 100}%;
+                        font-size: ${Math.random() * 10 + 10}px;
+                        opacity: ${Math.random() * 0.6 + 0.3};
+                        animation: snowfall ${Math.random() * 3 + 5}s linear infinite;
+                        animation-delay: ${Math.random() * 5}s;
+                    `;
+                    snowContainer.appendChild(snowflake);
+                }
+                
+                // Add animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes snowfall {
+                        to {
+                            transform: translateY(100vh) rotate(360deg);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        function addSparkleEffect() {
+            // Create sparkle container
+            let sparkleContainer = document.getElementById('sparkle-container');
+            if (!sparkleContainer) {
+                sparkleContainer = document.createElement('div');
+                sparkleContainer.id = 'sparkle-container';
+                sparkleContainer.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    overflow: hidden;
+                `;
+                document.body.appendChild(sparkleContainer);
+                
+                // Create sparkles
+                setInterval(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.innerHTML = '✨';
+                    sparkle.style.cssText = `
+                        position: absolute;
+                        top: ${Math.random() * 100}%;
+                        left: ${Math.random() * 100}%;
+                        font-size: ${Math.random() * 20 + 15}px;
+                        animation: sparkle 2s ease-out forwards;
+                    `;
+                    sparkleContainer.appendChild(sparkle);
+                    
+                    setTimeout(() => sparkle.remove(), 2000);
+                }, 300);
+                
+                // Add animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes sparkle {
+                        0% {
+                            opacity: 0;
+                            transform: scale(0) rotate(0deg);
+                        }
+                        50% {
+                            opacity: 1;
+                            transform: scale(1.2) rotate(180deg);
+                        }
+                        100% {
+                            opacity: 0;
+                            transform: scale(0) rotate(360deg);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Translations
+        const translations = {
+            is: {
+                nav: {
+                    logo: "Ferilskrágerð",
+                    home: "Heim",
+                    features: "Eiginleikar",
+                    howItWorks: "Hvernig virkar þetta",
+                    tips: "Ráð",
+                    about: "Um okkur",
+                    faq: "Algengar spurningar",
+                    startBuilding: "Byrja að búa til"
+                },
+                hero: {
+                    title: "Búðu til þína faglegu ferilskrá",
+                    subtitle: "Búðu til glæsilega ferilskrá fyrir starfsnám, vinnu og tækifæri. Fullkomið fyrir nemendur og þá sem eru að leita að starfi.",
+                    btnPrimary: "Byrja að búa til",
+                    btnSecondary: "Læra meira"
+                },
+                features: {
+                    mainTitle: "Hvað er ferilskrá og hvers vegna þarftu hana?",
+                    mainDesc: "<strong>Ferilskrá (CV)</strong> er skjal sem sýnir menntun þína, starfsreynslu, hæfni og árangur. Þetta er fyrsta skrefið í umsóknarferlinu og oft það sem ákvarðar hvort þú færð viðtal eða ekki. Góð ferilskrá getur gert mikinn mun þegar þú sækir um starf, starfsnám eða tækifæri!",
+                    whyTitle: "Af hverju að velja okkar ferilskrágerð?",
+                    cards: [
+                        { icon: "⚡", title: "Hratt og auðvelt", desc: "Búðu til faglega ferilskrá á nokkrum mínútum með einföldu viðmóti" },
+                        { icon: "🎨", title: "Fagleg útlit", desc: "Fáðu hreint, nútímalegt útlit sem vekur athygli vinnuveitenda" },
+                        { icon: "📱", title: "Virkar í síma", desc: "Búðu til og breyttu ferilskránni á hvaða tæki sem er, hvar sem er" },
+                        { icon: "💾", title: "Prenta og vista", desc: "Vistaðu ferilskránna sem PDF eða prentaðu beint úr vafranum" },
+                        { icon: "🔒", title: "100% persónuvernd", desc: "Öll gögn eru geymd í vafranum þínum - engin aðgangur, engin vöktun" },
+                        { icon: "🆓", title: "Alveg ókeypis", desc: "Engin falin gjöld, engin áskrift - bara búðu til ferilskrána ókeypis" }
+                    ]
+                },
+                howItWorks: {
+                    title: "Hvernig virkar þetta",
+                    steps: [
+                        { num: "1", title: "Fylltu út upplýsingar", desc: "Skráðu persónulegar upplýsingar, starfsreynslu, menntun og hæfni" },
+                        { num: "2", title: "Sjáðu forskoðun", desc: "Fylgstu með ferilskránni breytast í rauntíma þegar þú fyllir út" },
+                        { num: "3", title: "Sækja og deila", desc: "Sæktu ferilskránna sem PDF og sendu hana til vinnuveitenda" }
+                    ]
+                },
+                tips: {
+                    title: "Góð ráð fyrir frábæra ferilskrá",
+                    cards: [
+                        { icon: "✏️", title: "Vertu nákvæmur", desc: "Forðastu stafsetningarvillur og gakktu úr skugga um að allar upplýsingar séu réttar. Láttu annan lesa yfir áður en þú sendir inn." },
+                        { icon: "🎯", title: "Sérsníðu fyrir hvert starf", desc: "Lagaðu ferilskrána að því starfi sem þú sækir um. Leggðu áherslu á þá reynslu og hæfni sem skiptir mestu máli fyrir það tiltekna starf." },
+                        { icon: "💪", title: "Áhersla á árangur", desc: "Í stað þess að segja bara \"vann í verslun\", segðu \"þjónaði 50+ viðskiptavinum á dag og jók sölu um 15%\"." },
+                        { icon: "📝", title: "Haltu því stuttu", desc: "Ein til tvær síður eru fullnægjandi fyrir flest störf. Atvinnurekendur hafa ekki tíma til að lesa langar ferilskrár." },
+                        { icon: "🌟", title: "Byrjaðu sterkt", desc: "Skrifaðu sterka kynningu efst sem útskýrir hver þú ert og hvað þú hefur að bjóða. Þetta er fyrsta það sem atvinnurekandi sér." },
+                        { icon: "📧", title: "Fagleg samskipti", desc: "Notaðu faglegt netfang (t.d. nafn.nafnsson@gmail.com) og gakktu úr skugga um að símanúmerið þitt sé rétt." }
+                    ]
+                },
+                about: {
+                    title: "Um ferilskrágerðina",
+                    cards: [
+                        { icon: "🎓", title: "Sérstaklega hannað fyrir nemendur og unga starfsfólk", desc: "Við skiljum að það getur verið erfitt að búa til sína fyrstu ferilskrá, sérstaklega þegar þú hefur litla sem enga starfsreynslu. Þess vegna höfum við hannað þetta verkfæri með það í huga að hjálpa ungmennum að skapa faglega ferilskrá sem leggur áherslu á menntun, sjálfboðavinnu, íþróttir og aðra starfsemi sem sýnir hæfni þína." },
+                        { icon: "🔒", title: "100% ókeypis og einkamál", desc: "Engin skráning nauðsynleg, engin kreditkort, engar falin gjöld. Allar upplýsingar eru geymdar í vafranum þínum og við geymum ekkert. Þú átt öll þín gögn og getur búið til eins margar ferilskrár og þú vilt - algjörlega ókeypis." },
+                        { icon: "💼", title: "11 mismunandi starfstegundir", desc: "Hvort sem þú ert að leita að verslunarstarfi, vinnu á veitingastað, iðnstarfi eða tæknistarfi - við höfum sérsniðnar tillögur og dæmi fyrir hverja starfstegund. Veldu bara það sem hentar þér best og við hjálpum þér að fylla út réttar upplýsingar." }
+                    ],
+                    partnership: {
+                        title: "🤝 Í samstarfi við Tækniskólann",
+                        desc1: "Þessi ferilskrágerð er búin til í samstarfi við <strong>Tækniskólann</strong> til að hjálpa nemendum að undirbúa sig fyrir atvinnulífið. Tækniskólinn er stærsti framhaldsskóli landsins með yfir 2.500 nemendur í iðn- og tæknifögum.",
+                        desc2: "Nemendur Tækniskólans og allir aðrir geta nýtt sér þetta ókeypis verkfæri til að búa til faglegar ferilskrár fyrir starfsnám, vinnu eða fyrsta starfið. Góð ferilskrá er mikilvægt skref til að tryggja sér tækifæri í atvinnulífinu.",
+                        link: "Heimsækja Tækniskólann →"
+                    }
+                },
+                faq: {
+                    title: "Algengar spurningar",
+                    items: [
+                        { q: "❓ Hvað ef ég hef aldrei unnið áður?", a: "Það er alveg í lagi! Leggðu áherslu á menntun þína, sjálfboðavinnu, íþróttir, skólaverkefni og aðra hæfni. Allir byrja einhvers staðar og margar hæfni frá skóla og tómstundum geta verið mjög dýrmætar." },
+                        { q: "❓ Hversu löng ætti ferilskrá að vera?", a: "Fyrir fyrstu störf er ein síða oftast nóg. Það mikilvægasta er að hafa skýrar, viðeigandi upplýsingar fremur en að fylla margar síður." },
+                        { q: "❓ Get ég vistað og breytt síðar?", a: "Upplýsingarnar eru geymdar í vafranum þínum, svo þú getur hlaðið síðuna aftur í sama vafra. Við mælum samt með að þú prentir/vistar sem PDF þegar þú ert búin/n." },
+                        { q: "❓ Er þetta virkilega ókeypis?", a: "Já! Engin gjöld, engin áskrift, engin falin kostnaður. Verkfærið er algjörlega ókeypis að nota." }
+                    ]
+                },
+                cta: {
+                    title: "Tilbúinn að tryggja þér starf?",
+                    subtitle: "Byrjaðu að búa til ferilskrána þína í dag og sæktu um störf, starfsnám og tækifæri með sjálfstrausti",
+                    button: "Búa til ferilskrá núna"
+                },
+                footer: {
+                    copyright: "© 2025 Ferilskrágerð",
+                    privacy: "Öll gögn eru geymd örugg í vafranum þínum"
+                }
+            },
+            en: {
+                nav: {
+                    logo: "CV Builder",
+                    home: "Home",
+                    features: "Features",
+                    howItWorks: "How It Works",
+                    tips: "Tips",
+                    about: "About",
+                    faq: "FAQ",
+                    startBuilding: "Start Building"
+                },
+                hero: {
+                    title: "Create Your Professional Resume",
+                    subtitle: "Build a stunning resume for internships, jobs, and opportunities. Perfect for students and job seekers.",
+                    btnPrimary: "Start Building",
+                    btnSecondary: "Learn More"
+                },
+                features: {
+                    mainTitle: "What is a resume and why do you need one?",
+                    mainDesc: "<strong>A resume (CV)</strong> is a document that showcases your education, work experience, skills, and achievements. It's the first step in the application process and often determines whether you get an interview. A good resume can make a huge difference when applying for jobs, internships, or opportunities!",
+                    whyTitle: "Why choose our CV builder?",
+                    cards: [
+                        { icon: "⚡", title: "Fast and Easy", desc: "Create a professional resume in minutes with a simple interface" },
+                        { icon: "🎨", title: "Professional Design", desc: "Get a clean, modern look that catches employers' attention" },
+                        { icon: "📱", title: "Mobile Friendly", desc: "Create and edit your resume on any device, anywhere" },
+                        { icon: "💾", title: "Print and Save", desc: "Save your resume as PDF or print directly from your browser" },
+                        { icon: "🔒", title: "100% Private", desc: "All data is stored in your browser - no tracking, no access" },
+                        { icon: "🆓", title: "Completely Free", desc: "No hidden fees, no subscriptions - just create your resume for free" }
+                    ]
+                },
+                howItWorks: {
+                    title: "How It Works",
+                    steps: [
+                        { num: "1", title: "Fill in Details", desc: "Enter your personal information, work experience, education, and skills" },
+                        { num: "2", title: "Preview Live", desc: "Watch your resume update in real-time as you fill it out" },
+                        { num: "3", title: "Download and Share", desc: "Download your resume as PDF and send it to employers" }
+                    ]
+                },
+                tips: {
+                    title: "Tips for a Great Resume",
+                    cards: [
+                        { icon: "✏️", title: "Be Accurate", desc: "Avoid spelling errors and make sure all information is correct. Have someone else proofread before submitting." },
+                        { icon: "🎯", title: "Tailor for Each Job", desc: "Customize your resume for the job you're applying to. Emphasize the experience and skills that matter most for that specific position." },
+                        { icon: "💪", title: "Focus on Achievements", desc: "Instead of just saying \"worked in retail\", say \"served 50+ customers daily and increased sales by 15%\"." },
+                        { icon: "📝", title: "Keep It Short", desc: "One to two pages is sufficient for most jobs. Employers don't have time to read lengthy resumes." },
+                        { icon: "🌟", title: "Start Strong", desc: "Write a strong introduction at the top that explains who you are and what you have to offer. This is the first thing employers see." },
+                        { icon: "📧", title: "Professional Contact", desc: "Use a professional email (e.g. john.smith@gmail.com) and make sure your phone number is correct." }
+                    ]
+                },
+                about: {
+                    title: "About CV Builder",
+                    cards: [
+                        { icon: "🎓", title: "Specially designed for students and young professionals", desc: "We understand it can be difficult to create your first resume, especially when you have little to no work experience. That's why we've designed this tool to help young people create professional resumes that emphasize education, volunteering, sports, and other activities that showcase your skills." },
+                        { icon: "🔒", title: "100% free and private", desc: "No registration required, no credit cards, no hidden fees. All information is stored in your browser and we don't save anything. You own all your data and can create as many resumes as you want - completely free." },
+                        { icon: "💼", title: "11 different job types", desc: "Whether you're looking for retail work, restaurant jobs, trade work, or tech positions - we have customized suggestions and examples for each job type. Just choose what suits you best and we'll help you fill in the right information." }
+                    ],
+                    partnership: {
+                        title: "🤝 In partnership with Tækniskólinn",
+                        desc1: "This CV builder was created in partnership with <strong>Tækniskólinn</strong> to help students prepare for the job market. Tækniskólinn is Iceland's largest vocational school with over 2,500 students in technical and trade programs.",
+                        desc2: "Students of Tækniskólinn and everyone else can use this free tool to create professional resumes for internships, jobs, or their first position. A good resume is an important step in securing opportunities in the job market.",
+                        link: "Visit Tækniskólinn →"
+                    }
+                },
+                faq: {
+                    title: "Frequently Asked Questions",
+                    items: [
+                        { q: "❓ What if I've never worked before?", a: "That's completely fine! Focus on your education, volunteering, sports, school projects, and other skills. Everyone starts somewhere and many skills from school and hobbies can be very valuable." },
+                        { q: "❓ How long should a resume be?", a: "For first jobs, one page is usually enough. The most important thing is to have clear, relevant information rather than filling multiple pages." },
+                        { q: "❓ Can I save and edit later?", a: "Information is stored in your browser, so you can reload the page in the same browser. However, we recommend printing/saving as PDF when you're done." },
+                        { q: "❓ Is this really free?", a: "Yes! No fees, no subscriptions, no hidden costs. The tool is completely free to use." }
+                    ]
+                },
+                cta: {
+                    title: "Ready to land your dream job?",
+                    subtitle: "Start creating your resume today and apply for jobs, internships, and opportunities with confidence",
+                    button: "Create Resume Now"
+                },
+                footer: {
+                    copyright: "© 2025 CV Builder",
+                    privacy: "All data is stored securely in your browser"
+                }
+            }
+        };
+
+        // Current language
+        let currentLang = localStorage.getItem('landing_lang') || 'is';
+
+        // Update page text
+        function updateLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('landing_lang', lang);
+            document.documentElement.lang = lang;
+            
+            // Apply language-specific theme
+            applyLanguageTheme(lang);
+            
+            const t = translations[lang];
+            if (!t) return;
+            
+            // Update navigation with null checks
+            const logoText = document.querySelector('.logo-text');
+            if (logoText) logoText.textContent = t.nav.logo;
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            if (navLinks[0]) navLinks[0].textContent = t.nav.home;
+            if (navLinks[1]) navLinks[1].textContent = t.nav.features;
+            if (navLinks[2]) navLinks[2].textContent = t.nav.howItWorks;
+            if (navLinks[3]) navLinks[3].textContent = t.nav.tips;
+            if (navLinks[4]) navLinks[4].textContent = t.nav.about;
+            if (navLinks[5]) navLinks[5].textContent = t.nav.faq;
+            
+            const navBtn = document.querySelector('.nav-btn');
+            if (navBtn) navBtn.textContent = t.nav.startBuilding;
+            
+            // Update mobile menu
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileLinks[0].textContent = t.nav.home;
+            mobileLinks[1].textContent = t.nav.features;
+            mobileLinks[2].textContent = t.nav.howItWorks;
+            mobileLinks[3].textContent = t.nav.tips;
+            mobileLinks[4].textContent = t.nav.about;
+            mobileLinks[5].textContent = t.nav.faq;
+            mobileLinks[6].textContent = t.nav.startBuilding;
+            
+            // Update hero
+            document.querySelector('.hero-title').textContent = t.hero.title;
+            document.querySelector('.hero-subtitle').textContent = t.hero.subtitle;
+            document.querySelectorAll('.btn-primary')[0].textContent = t.hero.btnPrimary;
+            document.querySelector('.btn-secondary').textContent = t.hero.btnSecondary;
+            
+            // Update features section
+            const sectionTitles = document.querySelectorAll('.section-title');
+            sectionTitles[0].textContent = t.features.mainTitle;
+            document.querySelector('.info-text').innerHTML = t.features.mainDesc;
+            sectionTitles[1].textContent = t.features.whyTitle;
+            
+            // Update feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            t.features.cards.forEach((card, i) => {
+                if (featureCards[i]) {
+                    featureCards[i].querySelector('h3').textContent = card.title;
+                    featureCards[i].querySelector('p').textContent = card.desc;
+                }
+            });
+            
+            // Update how it works
+            sectionTitles[2].textContent = t.howItWorks.title;
+            const steps = document.querySelectorAll('.step');
+            t.howItWorks.steps.forEach((step, i) => {
+                if (steps[i]) {
+                    steps[i].querySelector('h3').textContent = step.title;
+                    steps[i].querySelector('p').textContent = step.desc;
+                }
+            });
+            
+            // Update tips section
+            sectionTitles[3].textContent = t.tips.title;
+            const tipCards = document.querySelectorAll('.tip-card');
+            t.tips.cards.forEach((card, i) => {
+                if (tipCards[i]) {
+                    tipCards[i].querySelector('h3').textContent = card.title;
+                    tipCards[i].querySelector('p').textContent = card.desc;
+                }
+            });
+            
+            // Update about section
+            sectionTitles[4].textContent = t.about.title;
+            const aboutTexts = document.querySelectorAll('.about-text');
+            t.about.cards.forEach((card, i) => {
+                if (aboutTexts[i]) {
+                    aboutTexts[i].querySelector('h3').textContent = card.title;
+                    aboutTexts[i].querySelector('p').textContent = card.desc;
+                }
+            });
+            
+            // Update partnership
+            sectionTitles[5].textContent = t.about.partnership.title;
+            const partnershipTexts = document.querySelectorAll('.partnership-text p');
+            if (partnershipTexts[0]) partnershipTexts[0].innerHTML = t.about.partnership.desc1;
+            if (partnershipTexts[1]) partnershipTexts[1].innerHTML = t.about.partnership.desc2;
+            const partnerLink = document.querySelector('.partner-link');
+            if (partnerLink) partnerLink.textContent = t.about.partnership.link;
+            
+            // Update FAQ section
+            sectionTitles[6].textContent = t.faq.title;
+            const faqItems = document.querySelectorAll('.faq-item');
+            t.faq.items.forEach((item, i) => {
+                if (faqItems[i]) {
+                    faqItems[i].querySelector('h3').textContent = item.q;
+                    faqItems[i].querySelector('p').textContent = item.a;
+                }
+            });
+            
+            // Update CTA section
+            const ctaTitle = document.querySelector('.cta-content h2');
+            const ctaSubtitle = document.querySelector('.cta-content p');
+            const ctaButton = document.querySelector('.btn-large');
+            if (ctaTitle) ctaTitle.textContent = t.cta.title;
+            if (ctaSubtitle) ctaSubtitle.textContent = t.cta.subtitle;
+            if (ctaButton) ctaButton.textContent = t.cta.button;
+            
+            // Update footer
+            document.querySelector('.footer-copyright').textContent = t.footer.copyright;
+            document.querySelector('.footer-note').innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: middle; margin-right: 6px;">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                </svg>
+                ${t.footer.privacy}
+            `;
+        }
+
+        function applyLanguageTheme(lang) {
+            const body = document.body;
+            const navbar = document.querySelector('.navbar');
+            
+            if (lang === 'is') {
+                // Icelandic theme - Blue, white, red (Iceland flag colors)
+                body.style.background = 'linear-gradient(-45deg, #003897, #0066cc, #ffffff, #dc1e35)';
+                body.style.backgroundSize = '400% 400%';
+                if (navbar) {
+                    navbar.style.background = 'rgba(0, 56, 151, 0.95)';
+                    navbar.style.borderBottom = '2px solid rgba(220, 30, 53, 0.3)';
+                }
+                
+                // Update all gradient buttons and elements
+                const style = document.createElement('style');
+                style.id = 'lang-theme-is';
+                document.getElementById('lang-theme-en')?.remove();
+                style.textContent = `
+                    .btn-primary, .nav-btn, .lang-btn.active::before {
+                        background: linear-gradient(135deg, #003897 0%, #0066cc 100%) !important;
+                    }
+                    .btn-primary:hover, .nav-btn:hover {
+                        background: linear-gradient(135deg, #0066cc 0%, #0088ff 100%) !important;
+                    }
+                    .feature-icon {
+                        color: #003897;
+                    }
+                    .step-number {
+                        background: linear-gradient(135deg, #003897, #0066cc);
+                    }
+                `;
+                document.head.appendChild(style);
+            } 
+            else if (lang === 'en') {
+                // English theme - Red, white, blue (UK flag colors)
+                body.style.background = 'linear-gradient(-45deg, #012169, #c8102e, #ffffff, #012169)';
+                body.style.backgroundSize = '400% 400%';
+                if (navbar) {
+                    navbar.style.background = 'rgba(1, 33, 105, 0.95)';
+                    navbar.style.borderBottom = '2px solid rgba(200, 16, 46, 0.3)';
+                }
+                
+                // Update all gradient buttons and elements
+                const style = document.createElement('style');
+                style.id = 'lang-theme-en';
+                document.getElementById('lang-theme-is')?.remove();
+                style.textContent = `
+                    .btn-primary, .nav-btn, .lang-btn.active::before {
+                        background: linear-gradient(135deg, #012169 0%, #c8102e 100%) !important;
+                    }
+                    .btn-primary:hover, .nav-btn:hover {
+                        background: linear-gradient(135deg, #c8102e 0%, #ff1744 100%) !important;
+                    }
+                    .feature-icon {
+                        color: #012169;
+                    }
+                    .step-number {
+                        background: linear-gradient(135deg, #012169, #c8102e);
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Language toggle event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.dataset.lang;
+                    
+                    console.log('Language button clicked:', lang); // Debug
+                    
+                    // Update active state
+                    langButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update language
+                    updateLanguage(lang);
+                });
+            });
+            
+            // Set initial language and theme
+            updateLanguage(currentLang);
+            const activeBtn = document.querySelector(`.lang-btn[data-lang="${currentLang}"]`);
+            if (activeBtn) {
+                langButtons.forEach(b => b.classList.remove('active'));
+                activeBtn.classList.add('active');
+            }
+            
+            // Apply holiday theme after language theme
+            setTimeout(() => {
+                const holidayTheme = getHolidayTheme();
+                if (holidayTheme !== 'default') {
+                    applyHolidayTheme();
+                }
+            }, 100);
+        });
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
