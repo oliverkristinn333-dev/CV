@@ -1,294 +1,197 @@
-// Tournament data structure
-let teams = [];
-let matches = [];
+// EHF EURO 2026 Tournament Data
+const TOURNAMENT_TEAMS = [
+    // Group A
+    { id: 1, name: 'Germany', group: 'A' },
+    { id: 2, name: 'Spain', group: 'A' },
+    { id: 3, name: 'Austria', group: 'A' },
+    { id: 4, name: 'Serbia', group: 'A' },
+    // Group B
+    { id: 5, name: 'Denmark', group: 'B' },
+    { id: 6, name: 'Portugal', group: 'B' },
+    { id: 7, name: 'North Macedonia', group: 'B' },
+    { id: 8, name: 'Romania', group: 'B' },
+    // Group C
+    { id: 9, name: 'Norway', group: 'C' },
+    { id: 10, name: 'France', group: 'C' },
+    { id: 11, name: 'Czechia', group: 'C' },
+    { id: 12, name: 'Ukraine', group: 'C' },
+    // Group D
+    { id: 13, name: 'Slovenia', group: 'D' },
+    { id: 14, name: 'Switzerland', group: 'D' },
+    { id: 15, name: 'Faroe Islands', group: 'D' },
+    { id: 16, name: 'Montenegro', group: 'D' },
+    // Group E
+    { id: 17, name: 'Sweden', group: 'E' },
+    { id: 18, name: 'Croatia', group: 'E' },
+    { id: 19, name: 'Netherlands', group: 'E' },
+    { id: 20, name: 'Georgia', group: 'E' },
+    // Group F
+    { id: 21, name: 'Iceland', group: 'F' },
+    { id: 22, name: 'Hungary', group: 'F' },
+    { id: 23, name: 'Italy', group: 'F' },
+    { id: 24, name: 'Poland', group: 'F' }
+];
 
-// Load data from localStorage on page load
+// Fixture Generation
+const FIXTURES = [
+    // Group A
+    { id: 101, group: 'A', date: '2026-01-15', team1: 1, team2: 4 }, // Germany vs Serbia
+    { id: 102, group: 'A', date: '2026-01-15', team1: 2, team2: 3 }, // Spain vs Austria
+    { id: 103, group: 'A', date: '2026-01-17', team1: 1, team2: 3 }, // Germany vs Austria
+    { id: 104, group: 'A', date: '2026-01-17', team1: 4, team2: 2 }, // Serbia vs Spain
+    { id: 105, group: 'A', date: '2026-01-19', team1: 1, team2: 2 }, // Germany vs Spain
+    { id: 106, group: 'A', date: '2026-01-19', team1: 3, team2: 4 }, // Austria vs Serbia
+    
+    // Group B
+    { id: 201, group: 'B', date: '2026-01-15', team1: 5, team2: 8 }, // Denmark vs Romania
+    { id: 202, group: 'B', date: '2026-01-15', team1: 6, team2: 7 }, // Portugal vs N.Macedonia
+    { id: 203, group: 'B', date: '2026-01-17', team1: 5, team2: 7 }, // Denmark vs N.Macedonia
+    { id: 204, group: 'B', date: '2026-01-17', team1: 8, team2: 6 }, // Romania vs Portugal
+    { id: 205, group: 'B', date: '2026-01-19', team1: 5, team2: 6 }, // Denmark vs Portugal
+    { id: 206, group: 'B', date: '2026-01-19', team1: 7, team2: 8 }, // N.Macedonia vs Romania
+
+    // Group C
+    { id: 301, group: 'C', date: '2026-01-15', team1: 9, team2: 12 }, // Norway vs Ukraine
+    { id: 302, group: 'C', date: '2026-01-15', team1: 10, team2: 11 }, // France vs Czechia
+    { id: 303, group: 'C', date: '2026-01-17', team1: 9, team2: 11 }, // Norway vs Czechia
+    { id: 304, group: 'C', date: '2026-01-17', team1: 12, team2: 10 }, // Ukraine vs France
+    { id: 305, group: 'C', date: '2026-01-19', team1: 9, team2: 10 }, // Norway vs France
+    { id: 306, group: 'C', date: '2026-01-19', team1: 11, team2: 12 }, // Czechia vs Ukraine
+
+    // Group D
+    { id: 401, group: 'D', date: '2026-01-16', team1: 13, team2: 16 }, // Slovenia vs Montenegro
+    { id: 402, group: 'D', date: '2026-01-16', team1: 14, team2: 15 }, // Switzerland vs Faroe Islands
+    { id: 403, group: 'D', date: '2026-01-18', team1: 13, team2: 15 }, // Slovenia vs Faroe Islands
+    { id: 404, group: 'D', date: '2026-01-18', team1: 16, team2: 14 }, // Montenegro vs Switzerland
+    { id: 405, group: 'D', date: '2026-01-20', team1: 13, team2: 14 }, // Slovenia vs Switzerland
+    { id: 406, group: 'D', date: '2026-01-20', team1: 15, team2: 16 }, // Faroe Islands vs Montenegro
+
+    // Group E
+    { id: 501, group: 'E', date: '2026-01-16', team1: 17, team2: 20 }, // Sweden vs Georgia
+    { id: 502, group: 'E', date: '2026-01-16', team1: 18, team2: 19 }, // Croatia vs Netherlands
+    { id: 503, group: 'E', date: '2026-01-18', team1: 17, team2: 19 }, // Sweden vs Netherlands
+    { id: 504, group: 'E', date: '2026-01-18', team1: 20, team2: 18 }, // Georgia vs Croatia
+    { id: 505, group: 'E', date: '2026-01-20', team1: 17, team2: 18 }, // Sweden vs Croatia
+    { id: 506, group: 'E', date: '2026-01-20', team1: 19, team2: 20 }, // Netherlands vs Georgia
+
+    // Group F
+    { id: 601, group: 'F', date: '2026-01-16', team1: 21, team2: 24 }, // Iceland vs Poland
+    { id: 602, group: 'F', date: '2026-01-16', team1: 22, team2: 23 }, // Hungary vs Italy
+    { id: 603, group: 'F', date: '2026-01-18', team1: 21, team2: 23 }, // Iceland vs Italy
+    { id: 604, group: 'F', date: '2026-01-18', team1: 24, team2: 22 }, // Poland vs Hungary
+    { id: 605, group: 'F', date: '2026-01-20', team1: 21, team2: 22 }, // Iceland vs Hungary
+    { id: 606, group: 'F', date: '2026-01-20', team1: 23, team2: 24 }  // Italy vs Poland
+];
+
+// State
+let predictions = {}; 
+
 document.addEventListener('DOMContentLoaded', () => {
-    loadData();
-    updateTeamSelects();
+    loadPredictions();
+    renderFixtures();
     updateStandings();
-    updateMatchHistory();
 });
 
-// Save data to localStorage
-function saveData() {
-    localStorage.setItem('handballTeams', JSON.stringify(teams));
-    localStorage.setItem('handballMatches', JSON.stringify(matches));
+function loadPredictions() {
+    const saved = localStorage.getItem('ehfEuroPredictions');
+    if (saved) predictions = JSON.parse(saved);
 }
 
-// Load data from localStorage
-function loadData() {
-    const savedTeams = localStorage.getItem('handballTeams');
-    const savedMatches = localStorage.getItem('handballMatches');
-    
-    if (savedTeams) {
-        teams = JSON.parse(savedTeams);
-        renderTeamsList();
-    }
-    
-    if (savedMatches) {
-        matches = JSON.parse(savedMatches);
-    }
+function savePredictions() {
+    localStorage.setItem('ehfEuroPredictions', JSON.stringify(predictions));
 }
 
-// Add a new team
-function addTeam() {
-    const teamNameInput = document.getElementById('teamName');
-    const teamGroupInput = document.getElementById('teamGroup');
-    const teamName = teamNameInput.value.trim();
-    const group = teamGroupInput.value;
-    
-    if (!teamName) {
-        alert('Please enter a team name');
-        return;
-    }
-    
-    // Check for duplicate team names
-    if (teams.some(team => team.name.toLowerCase() === teamName.toLowerCase())) {
-        alert('This team already exists');
-        return;
-    }
-    
-    const newTeam = {
-        id: Date.now(),
-        name: teamName,
-        group: group,
-        played: 0,
-        wins: 0,
-        draws: 0,
-        losses: 0,
-        goalsFor: 0,
-        goalsAgainst: 0,
-        goalDifference: 0,
-        points: 0
-    };
-    
-    teams.push(newTeam);
-    teamNameInput.value = '';
-    
-    saveData();
-    renderTeamsList();
-    updateTeamSelects();
+function updateScore(fixtureId, teamIndex, score) {
+    if (!predictions[fixtureId]) predictions[fixtureId] = { score1: null, score2: null };
+    const val = score === '' ? null : parseInt(score);
+    if (teamIndex === 1) predictions[fixtureId].score1 = val;
+    else predictions[fixtureId].score2 = val;
+    savePredictions();
     updateStandings();
 }
 
-// Remove a team
-function removeTeam(teamId) {
-    if (!confirm('Are you sure you want to remove this team? All their matches will be deleted.')) {
-        return;
-    }
-    
-    teams = teams.filter(team => team.id !== teamId);
-    matches = matches.filter(match => match.homeTeamId !== teamId && match.awayTeamId !== teamId);
-    
-    saveData();
-    renderTeamsList();
-    updateTeamSelects();
-    recalculateStandings();
-    updateMatchHistory();
-}
-
-// Render teams list
-function renderTeamsList() {
-    const teamsList = document.getElementById('teamsList');
-    
-    if (teams.length === 0) {
-        teamsList.innerHTML = '<p class="empty-state">No teams added yet</p>';
-        return;
-    }
-    
-    // Sort teams by group then name for display
-    const displayTeams = [...teams].sort((a, b) => {
-        if (a.group !== b.group) return a.group.localeCompare(b.group);
-        return a.name.localeCompare(b.name);
+function renderFixtures() {
+    const fixturesContainer = document.getElementById('fixturesList');
+    const byDate = {};
+    FIXTURES.forEach(f => {
+        if (!byDate[f.date]) byDate[f.date] = [];
+        byDate[f.date].push(f);
     });
-
-    teamsList.innerHTML = displayTeams.map(team => `
-        <div class="team-item">
-            <span class="team-name">[Group ${team.group}] ${escapeHtml(team.name)}</span>
-            <button class="btn-remove" onclick="removeTeam(${team.id})">Remove</button>
-        </div>
-    `).join('');
+    const sortedDates = Object.keys(byDate).sort();
+    fixturesContainer.innerHTML = sortedDates.map(date => {
+        const d = new Date(date);
+        const dateStr = d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+        return `
+            <div class="date-section">
+                <h3 class="date-header">${dateStr}</h3>
+                <div class="fixtures-grid">
+                    ${byDate[date].map(f => {
+                        const t1 = TOURNAMENT_TEAMS.find(t => t.id === f.team1);
+                        const t2 = TOURNAMENT_TEAMS.find(t => t.id === f.team2);
+                        const pred = predictions[f.id] || { score1: '', score2: '' };
+                        return `
+                            <div class="fixture-card">
+                                <div class="fixture-info">Group ${f.group}</div>
+                                <div class="fixture-teams">
+                                    <div class="team-input">
+                                        <span class="team-name">${t1.name}</span>
+                                        <input type="number" min="0" value="${pred.score1 ?? ''}" oninput="updateScore(${f.id}, 1, this.value)">
+                                    </div>
+                                    <span class="vs">:</span>
+                                    <div class="team-input">
+                                        <input type="number" min="0" value="${pred.score2 ?? ''}" oninput="updateScore(${f.id}, 2, this.value)">
+                                        <span class="team-name">${t2.name}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 
-// Update team select dropdowns
-function updateTeamSelects() {
-    const homeSelect = document.getElementById('homeTeam');
-    const awaySelect = document.getElementById('awayTeam');
-    
-    const options = teams.map(team => 
-        `<option value="${team.id}">${escapeHtml(team.name)}</option>`
-    ).join('');
-    
-    homeSelect.innerHTML = '<option value="">Select home team</option>' + options;
-    awaySelect.innerHTML = '<option value="">Select away team</option>' + options;
-}
-
-// Add a match
-function addMatch() {
-    const homeTeamId = parseInt(document.getElementById('homeTeam').value);
-    const awayTeamId = parseInt(document.getElementById('awayTeam').value);
-    const homeScore = parseInt(document.getElementById('homeScore').value);
-    const awayScore = parseInt(document.getElementById('awayScore').value);
-    
-    // Validation
-    if (!homeTeamId || !awayTeamId) {
-        alert('Please select both teams');
-        return;
-    }
-    
-    if (homeTeamId === awayTeamId) {
-        alert('Home and away teams must be different');
-        return;
-    }
-    
-    if (isNaN(homeScore) || isNaN(awayScore) || homeScore < 0 || awayScore < 0) {
-        alert('Please enter valid scores (0 or higher)');
-        return;
-    }
-    
-    const match = {
-        id: Date.now(),
-        homeTeamId,
-        awayTeamId,
-        homeScore,
-        awayScore,
-        date: new Date().toISOString()
-    };
-    
-    matches.push(match);
-    
-    // Clear inputs
-    document.getElementById('homeTeam').value = '';
-    document.getElementById('awayTeam').value = '';
-    document.getElementById('homeScore').value = '';
-    document.getElementById('awayScore').value = '';
-    
-    saveData();
-    recalculateStandings();
-    updateMatchHistory();
-}
-
-// Recalculate all standings from scratch
-function recalculateStandings() {
-    // Reset all team stats
-    teams.forEach(team => {
-        team.played = 0;
-        team.wins = 0;
-        team.draws = 0;
-        team.losses = 0;
-        team.goalsFor = 0;
-        team.goalsAgainst = 0;
-        team.goalDifference = 0;
-        team.points = 0;
-    });
-    
-    // Process all matches
-    matches.forEach(match => {
-        const homeTeam = teams.find(t => t.id === match.homeTeamId);
-        const awayTeam = teams.find(t => t.id === match.awayTeamId);
-        
-        if (!homeTeam || !awayTeam) return;
-        
-        // Update games played
-        homeTeam.played++;
-        awayTeam.played++;
-        
-        // Update goals
-        homeTeam.goalsFor += match.homeScore;
-        homeTeam.goalsAgainst += match.awayScore;
-        awayTeam.goalsFor += match.awayScore;
-        awayTeam.goalsAgainst += match.homeScore;
-        
-        // Determine result and update stats
-        if (match.homeScore > match.awayScore) {
-            // Home win
-            homeTeam.wins++;
-            homeTeam.points += 2;
-            awayTeam.losses++;
-        } else if (match.homeScore < match.awayScore) {
-            // Away win
-            awayTeam.wins++;
-            awayTeam.points += 2;
-            homeTeam.losses++;
-        } else {
-            // Draw
-            homeTeam.draws++;
-            awayTeam.draws++;
-            homeTeam.points += 1;
-            awayTeam.points += 1;
-        }
-        
-        // Update goal difference
-        homeTeam.goalDifference = homeTeam.goalsFor - homeTeam.goalsAgainst;
-        awayTeam.goalDifference = awayTeam.goalsFor - awayTeam.goalsAgainst;
-    });
-    
-    saveData();
-    updateStandings();
-}
-
-// Update standings table
 function updateStandings() {
     const groupsContainer = document.getElementById('groupsContainer');
+    const stats = {};
+    TOURNAMENT_TEAMS.forEach(t => stats[t.id] = { ...t, gp:0, w:0, d:0, l:0, gf:0, ga:0, gd:0, pts:0 });
     
-    if (teams.length === 0) {
-        groupsContainer.innerHTML = '<p class="empty-state">Add teams to start the tournament</p>';
-        return;
-    }
-    
-    // Group teams by group property
-    const groupedTeams = {};
-    teams.forEach(team => {
-        if (!groupedTeams[team.group]) groupedTeams[team.group] = [];
-        groupedTeams[team.group].push(team);
+    Object.keys(predictions).forEach(id => {
+        const f = FIXTURES.find(x => x.id == id);
+        const p = predictions[id];
+        if (p.score1 !== null && p.score2 !== null) {
+            const t1 = stats[f.team1], t2 = stats[f.team2];
+            t1.gp++; t2.gp++;
+            t1.gf += p.score1; t1.ga += p.score2;
+            t2.gf += p.score2; t2.ga += p.score1;
+            if (p.score1 > p.score2) { t1.w++; t1.pts += 2; t2.l++; }
+            else if (p.score1 < p.score2) { t2.w++; t2.pts += 2; t1.l++; }
+            else { t1.d++; t1.pts++; t2.d++; t2.pts++; }
+            t1.gd = t1.gf - t1.ga; t2.gd = t2.gf - t2.ga;
+        }
     });
-    
-    // Sort group names (A, B, C...)
-    const sortedGroupNames = Object.keys(groupedTeams).sort();
-    
-    groupsContainer.innerHTML = sortedGroupNames.map(groupName => {
-        const groupTeams = groupedTeams[groupName];
-        const sortedTeams = sortTeamsByEHFRules(groupTeams);
-        
+
+    const groups = ['A','B','C','D','E','F'];
+    groupsContainer.innerHTML = groups.map(g => {
+        const gTeams = Object.values(stats).filter(t => t.group === g);
+        const sorted = sortTeamsByEHFRules(gTeams);
         return `
             <div class="group-standings">
-                <h3>Group ${groupName}</h3>
+                <h3>Group ${g}</h3>
                 <div class="table-container">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Pos</th>
-                                <th>Team</th>
-                                <th title="Games Played">GP</th>
-                                <th title="Wins">W</th>
-                                <th title="Draws">D</th>
-                                <th title="Losses">L</th>
-                                <th title="Goals For">GF</th>
-                                <th title="Goals Against">GA</th>
-                                <th title="Goal Difference">GD</th>
-                                <th title="Points">PTS</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>Pos</th><th>Team</th><th>GP</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>PTS</th></tr></thead>
                         <tbody>
-                            ${sortedTeams.map((team, index) => {
-                                const position = index + 1;
-                                const positionClass = position <= 2 ? 'qualifier' : '';
-                                return `
-                                    <tr class="${positionClass}">
-                                        <td>${position}</td>
-                                        <td class="team-cell">${escapeHtml(team.name)}</td>
-                                        <td>${team.played}</td>
-                                        <td>${team.wins}</td>
-                                        <td>${team.draws}</td>
-                                        <td>${team.losses}</td>
-                                        <td>${team.goalsFor}</td>
-                                        <td>${team.goalsAgainst}</td>
-                                        <td>${team.goalDifference > 0 ? '+' : ''}${team.goalDifference}</td>
-                                        <td><strong>${team.points}</strong></td>
-                                    </tr>
-                                `;
-                            }).join('')}
+                            ${sorted.map((t, i) => `
+                                <tr class="${i < 2 ? 'qualifier' : ''}">
+                                    <td>${i+1}</td>
+                                    <td class="team-cell">${t.name}</td>
+                                    <td>${t.gp}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td>
+                                    <td>${t.gf}</td><td>${t.ga}</td><td>${t.gd > 0 ? '+':''}${t.gd}</td>
+                                    <td>${t.pts}</td>
+                                </tr>
+                            `).join('')}
                         </tbody>
                     </table>
                 </div>
@@ -297,135 +200,46 @@ function updateStandings() {
     }).join('');
 }
 
-// Implement EHF tie-breaking rules
-function sortTeamsByEHFRules(teamsToSort) {
-    return [...teamsToSort].sort((a, b) => {
-        // 1. Higher points in all matches
-        if (b.points !== a.points) return b.points - a.points;
-
-        // Teams are level on points. Check head-to-head.
-        // Identify all teams with these points
-        const levelTeams = teamsToSort.filter(t => t.points === a.points);
-        
-        if (levelTeams.length > 1) {
-            const h2hStats = calculateSubStandings(levelTeams);
-            const statsA = h2hStats[a.id];
-            const statsB = h2hStats[b.id];
-
-            // 2. Higher points in head-to-head
-            if (statsB.points !== statsA.points) return statsB.points - statsA.points;
-            
-            // 3. Goal difference in head-to-head
-            if (statsB.gd !== statsA.gd) return statsB.gd - statsA.gd;
-            
-            // 4. Goals scored in head-to-head
-            if (statsB.gf !== statsA.gf) return statsB.gf - statsA.gf;
+function sortTeamsByEHFRules(teams) {
+    return [...teams].sort((a,b) => {
+        if (b.pts !== a.pts) return b.pts - a.pts;
+        const level = teams.filter(t => t.pts === a.pts);
+        if (level.length > 1) {
+            const h2h = calculateH2H(level);
+            if (h2h[b.id].pts !== h2h[a.id].pts) return h2h[b.id].pts - h2h[a.id].pts;
+            if (h2h[b.id].gd !== h2h[a.id].gd) return h2h[b.id].gd - h2h[a.id].gd;
+            if (h2h[b.id].gf !== h2h[a.id].gf) return h2h[b.id].gf - h2h[a.id].gf;
         }
-
-        // 5. Overall goal difference in the group
-        if (b.goalDifference !== a.goalDifference) return b.goalDifference - a.goalDifference;
-
-        // 6. Overall goals scored in the group
-        return b.goalsFor - a.goalsFor;
+        if (b.gd !== a.gd) return b.gd - a.gd;
+        return b.gf - a.gf;
     });
 }
 
-// Calculate standings using only matches between a subset of teams
-function calculateSubStandings(subsetTeams) {
-    const subsetIds = subsetTeams.map(t => t.id);
-    const stats = {};
-    
-    subsetIds.forEach(id => {
-        stats[id] = { points: 0, gd: 0, gf: 0 };
-    });
-    
-    matches.forEach(match => {
-        if (subsetIds.includes(match.homeTeamId) && subsetIds.includes(match.awayTeamId)) {
-            const home = stats[match.homeTeamId];
-            const away = stats[match.awayTeamId];
-            
-            home.gf += match.homeScore;
-            home.gd += (match.homeScore - match.awayScore);
-            away.gf += match.awayScore;
-            away.gd += (match.awayScore - match.homeScore);
-            
-            if (match.homeScore > match.awayScore) home.points += 2;
-            else if (match.homeScore < match.awayScore) away.points += 2;
-            else {
-                home.points += 1;
-                away.points += 1;
+function calculateH2H(levelTeams) {
+    const ids = levelTeams.map(t => t.id);
+    const h2h = {};
+    ids.forEach(id => h2h[id] = { pts:0, gd:0, gf:0 });
+    FIXTURES.forEach(f => {
+        if (ids.includes(f.team1) && ids.includes(f.team2)) {
+            const p = predictions[f.id];
+            if (p && p.score1 !== null && p.score2 !== null) {
+                const h = h2h[f.team1], a = h2h[f.team2];
+                h.gf += p.score1; h.gd += (p.score1 - p.score2);
+                a.gf += p.score2; a.gd += (p.score2 - p.score1);
+                if (p.score1 > p.score2) h.pts += 2;
+                else if (p.score1 < p.score2) a.pts += 2;
+                else { h.pts++; a.pts++; }
             }
         }
     });
-    
-    return stats;
+    return h2h;
 }
 
-// Update match history
-function updateMatchHistory() {
-    const matchHistoryList = document.getElementById('matchHistoryList');
-    
-    if (matches.length === 0) {
-        matchHistoryList.innerHTML = '<p class="empty-state">No matches recorded yet</p>';
-        return;
-    }
-    
-    // Sort matches by date (most recent first)
-    const sortedMatches = [...matches].sort((a, b) => 
-        new Date(b.date) - new Date(a.date)
-    );
-    
-    matchHistoryList.innerHTML = sortedMatches.map(match => {
-        const homeTeam = teams.find(t => t.id === match.homeTeamId);
-        const awayTeam = teams.find(t => t.id === match.awayTeamId);
-        
-        if (!homeTeam || !awayTeam) return '';
-        
-        const matchDate = new Date(match.date);
-        const dateString = matchDate.toLocaleDateString() + ' ' + 
-                          matchDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
-        return `
-            <div class="match-item">
-                <div class="match-teams">
-                    <span>${escapeHtml(homeTeam.name)}</span>
-                    <span class="match-score">${match.homeScore} : ${match.awayScore}</span>
-                    <span>${escapeHtml(awayTeam.name)}</span>
-                </div>
-                <span class="match-date">${dateString}</span>
-            </div>
-        `;
-    }).join('');
-}
-
-// Reset tournament
 function resetTournament() {
-    if (!confirm('Are you sure you want to reset the entire tournament? This will delete all teams and matches.')) {
-        return;
+    if (confirm('Reset all predictions?')) {
+        predictions = {};
+        savePredictions();
+        renderFixtures();
+        updateStandings();
     }
-    
-    teams = [];
-    matches = [];
-    
-    localStorage.removeItem('handballTeams');
-    localStorage.removeItem('handballMatches');
-    
-    renderTeamsList();
-    updateTeamSelects();
-    updateStandings();
-    updateMatchHistory();
 }
-
-// Utility function to escape HTML
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-// Allow Enter key to add team
-document.getElementById('teamName').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        addTeam();
-    }
-});

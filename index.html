@@ -14,69 +14,29 @@
         </header>
 
         <div class="main-content">
-            <!-- Team Management Section -->
-            <section class="team-management">
-                <h2>Team Management</h2>
-                <div class="add-team-form">
-                    <input type="text" id="teamName" placeholder="Enter team name" maxlength="50">
-                    <select id="teamGroup">
-                        <option value="A">Group A</option>
-                        <option value="B">Group B</option>
-                        <option value="C">Group C</option>
-                        <option value="D">Group D</option>
-                        <option value="E">Group E</option>
-                        <option value="F">Group F</option>
-                    </select>
-                    <button onclick="addTeam()" class="btn-primary">Add Team</button>
+            <!-- Prediction Section -->
+            <section class="prediction-view">
+                <div class="standings-header">
+                    <h2>Fixtures & Predictions</h2>
+                    <p class="section-desc">Enter scores to predict the final group outcome.</p>
                 </div>
-                <div id="teamsList" class="teams-list"></div>
-            </section>
-
-            <!-- Match Input Section -->
-            <section class="match-input">
-                <h2>Record Match Result</h2>
-                <div class="match-form">
-                    <div class="team-select-group">
-                        <div class="team-select">
-                            <label for="homeTeam">Home Team</label>
-                            <select id="homeTeam">
-                                <option value="">Select home team</option>
-                            </select>
-                        </div>
-                        <div class="score-input">
-                            <input type="number" id="homeScore" min="0" placeholder="0">
-                            <span class="vs">:</span>
-                            <input type="number" id="awayScore" min="0" placeholder="0">
-                        </div>
-                        <div class="team-select">
-                            <label for="awayTeam">Away Team</label>
-                            <select id="awayTeam">
-                                <option value="">Select away team</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button onclick="addMatch()" class="btn-primary btn-large">Record Match</button>
+                <div id="fixturesList" class="fixtures-list">
+                    <!-- Fixtures will be dynamically inserted here -->
                 </div>
             </section>
 
             <!-- Standings Table -->
             <section class="standings">
                 <div class="standings-header">
-                    <h2>Tournament Standings</h2>
-                    <button onclick="resetTournament()" class="btn-danger">Reset Tournament</button>
+                    <h2>Calculated Standings</h2>
+                    <button onclick="resetTournament()" class="btn-danger">Clear All Predictions</button>
                 </div>
                 <div id="groupsContainer" class="groups-container">
                     <!-- Groups will be dynamically inserted here -->
                 </div>
             </section>
+        </div>
 
-            <!-- Match History -->
-            <section class="match-history">
-                <h2>Match History</h2>
-                <div id="matchHistoryList" class="match-list">
-                    <p class="empty-state">No matches recorded yet</p>
-                </div>
-            </section>
         </div>
     </div>
 

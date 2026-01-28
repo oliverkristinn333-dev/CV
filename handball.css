@@ -33,37 +33,94 @@ body {
     gap: 30px;
 }
 
-.group-standings {
+.fixtures-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.date-section {
     background: white;
     padding: 20px;
     border-radius: 12px;
     box-shadow: var(--shadow);
 }
 
-.group-standings h3 {
-    background: var(--primary-color);
+.date-header {
+    font-size: 1.4em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+}
+
+.fixtures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 15px;
+}
+
+.fixture-card {
+    background: var(--bg-color);
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.fixture-info {
+    font-size: 0.85em;
+    font-weight: bold;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.fixture-teams {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.team-input {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.team-input:last-child {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.team-name {
+    font-weight: 600;
+    font-size: 0.95em;
+    flex: 1;
+}
+
+.team-input input {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.vs {
+    font-weight: bold;
+    color: var(--text-secondary);
+}
+
+.section-desc {
     color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    font-size: 1.2em;
-    display: inline-block;
-}
-
-tr.qualifier {
-    background-color: rgba(255, 204, 0, 0.1);
-}
-
-tr.qualifier td:first-child {
-    border-left: 5px solid var(--accent-color);
-}
-
-#teamGroup {
-    padding: 12px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1em;
-    background: white;
+    opacity: 0.9;
+    margin-bottom: 20px;
 }
 
 /* ... existing styles ... */
