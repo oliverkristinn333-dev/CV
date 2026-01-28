@@ -158,8 +158,31 @@ function loadPredictions() {
     if (saved) predictions = JSON.parse(saved);
 }
 
-function savePredictions() {
+function savePredictions(showToast = false) {
     localStorage.setItem('ehfEuroPredictions', JSON.stringify(predictions));
+    if (showToast) {
+        alert('Tournament predictions saved successfully!');
+    }
+}
+
+function randomizePredictions() {
+    if (!confirm('Randomize all match scores? This will overwrite your current predictions.')) return;
+    
+    const allFixtures = [...PRELIM_FIXTURES, ...MAIN_ROUND_FIXTURES, ...KNOCKOUT_FIXTURES];
+    allFixtures.forEach(f => {
+        predictions[f.id] = {
+            score1: Math.floor(Math.random() * 15) + 20, // 20-34 goals
+            score2: Math.floor(Math.random() * 15) + 20
+        };
+        // Ensure knockout matches don't end in a draw
+        if (!f.group && predictions[f.id].score1 === predictions[f.id].score2) {
+            predictions[f.id].score1++;
+        }
+    });
+
+    savePredictions();
+    renderFixtures();
+    updateStandings();
 }
 
 function updateScore(fixtureId, teamIndex, score) {
@@ -168,7 +191,7 @@ function updateScore(fixtureId, teamIndex, score) {
     if (teamIndex === 1) predictions[fixtureId].score1 = val;
     else predictions[fixtureId].score2 = val;
     savePredictions();
-    renderFixtures(); // Re-render to update dynamic teams in next stages
+    renderFixtures(); 
     updateStandings();
 }
 
@@ -361,6 +384,53 @@ function updateStandings() {
     });
 
     groupsContainer.innerHTML = html;
+    renderBracket(prelimStats);
+}
+
+function renderBracket(stats) {
+    const bracketView = document.getElementById('bracketView');
+    if (!bracketView) return;
+
+    // Semi-finals
+    const sf1 = KNOCKOUT_FIXTURES.find(f => f.id === 902);
+    const sf2 = KNOCKOUT_FIXTURES.find(f => f.id === 903);
+    const p34 = KNOCKOUT_FIXTURES.find(f => f.id === 904);
+    const final = KNOCKOUT_FIXTURES.find(f => f.id === 905);
+
+    const renderBracketMatch = (match, label) => {
+        const t1 = resolveTeam(match.team1, stats);
+        const t2 = resolveTeam(match.team2, stats);
+        const pred = predictions[match.id] || { score1: '', score2: '' };
+        const w1 = pred.score1 !== null && pred.score2 !== null && pred.score1 > pred.score2;
+        const w2 = pred.score1 !== null && pred.score2 !== null && pred.score2 > pred.score1;
+
+        return `
+            <div class="bracket-match">
+                <div class="bracket-match-header">${label}</div>
+                <div class="bracket-team ${w1 ? 'winner' : ''}">
+                    <img src="https://flagcdn.com/16x12/${t1.flag || 'un'}.png" class="flag-icon-small">
+                    <span class="team-name">${t1.name}</span>
+                    <span class="team-score">${pred.score1 ?? '-'}</span>
+                </div>
+                <div class="bracket-team ${w2 ? 'winner' : ''}">
+                    <img src="https://flagcdn.com/16x12/${t2.flag || 'un'}.png" class="flag-icon-small">
+                    <span class="team-name">${t2.name}</span>
+                    <span class="team-score">${pred.score2 ?? '-'}</span>
+                </div>
+            </div>
+        `;
+    };
+
+    bracketView.innerHTML = `
+        <div class="bracket-col" data-stage="Semi-Finals">
+            ${renderBracketMatch(sf1, 'Semi-final 1')}
+            ${renderBracketMatch(sf2, 'Semi-final 2')}
+        </div>
+        <div class="bracket-col" data-stage="Finals">
+            ${renderBracketMatch(final, 'Championship Final')}
+            ${renderBracketMatch(p34, '3rd Place Match')}
+        </div>
+    `;
 }
 
 function renderStandingTable(title, sorted, qualifierCount = 2) {

@@ -11,9 +11,22 @@
         <header>
             <h1>🤾 EHF EURO 2026 Men's Standings</h1>
             <p class="subtitle">Official Tie-breaker Rules | Tournament Manager</p>
+            <div class="header-actions">
+                <button onclick="randomizePredictions()" class="btn-secondary">🎲 Randomize</button>
+                <button onclick="savePredictions(true)" class="btn-primary">💾 Save Hub</button>
+                <button onclick="resetTournament()" class="btn-danger">🔄 Reset</button>
+            </div>
         </header>
 
         <div class="main-content">
+            <!-- Bracket Section -->
+            <section class="bracket-container">
+                <h2>Knockout Bracket</h2>
+                <div class="bracket-wrapper" id="bracketView">
+                    <!-- Dynamic Bracket -->
+                </div>
+            </section>
+
             <!-- Prediction Section -->
             <section class="prediction-view">
                 <div class="standings-header">
