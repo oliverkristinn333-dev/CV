@@ -1,35 +1,35 @@
 // EHF EURO 2026 Tournament Data
 const TOURNAMENT_TEAMS = [
     // Group A
-    { id: 1, name: 'Germany', group: 'A' },
-    { id: 2, name: 'Spain', group: 'A' },
-    { id: 3, name: 'Austria', group: 'A' },
-    { id: 4, name: 'Serbia', group: 'A' },
+    { id: 1, name: 'Germany', group: 'A', flag: 'de' },
+    { id: 2, name: 'Spain', group: 'A', flag: 'es' },
+    { id: 3, name: 'Austria', group: 'A', flag: 'at' },
+    { id: 4, name: 'Serbia', group: 'A', flag: 'rs' },
     // Group B
-    { id: 5, name: 'Denmark', group: 'B' },
-    { id: 6, name: 'Portugal', group: 'B' },
-    { id: 7, name: 'North Macedonia', group: 'B' },
-    { id: 8, name: 'Romania', group: 'B' },
+    { id: 5, name: 'Denmark', group: 'B', flag: 'dk' },
+    { id: 6, name: 'Portugal', group: 'B', flag: 'pt' },
+    { id: 7, name: 'North Macedonia', group: 'B', flag: 'mk' },
+    { id: 8, name: 'Romania', group: 'B', flag: 'ro' },
     // Group C
-    { id: 9, name: 'Norway', group: 'C' },
-    { id: 10, name: 'France', group: 'C' },
-    { id: 11, name: 'Czechia', group: 'C' },
-    { id: 12, name: 'Ukraine', group: 'C' },
+    { id: 9, name: 'Norway', group: 'C', flag: 'no' },
+    { id: 10, name: 'France', group: 'C', flag: 'fr' },
+    { id: 11, name: 'Czechia', group: 'C', flag: 'cz' },
+    { id: 12, name: 'Ukraine', group: 'C', flag: 'ua' },
     // Group D
-    { id: 13, name: 'Slovenia', group: 'D' },
-    { id: 14, name: 'Switzerland', group: 'D' },
-    { id: 15, name: 'Faroe Islands', group: 'D' },
-    { id: 16, name: 'Montenegro', group: 'D' },
+    { id: 13, name: 'Slovenia', group: 'D', flag: 'si' },
+    { id: 14, name: 'Switzerland', group: 'D', flag: 'ch' },
+    { id: 15, name: 'Faroe Islands', group: 'D', flag: 'fo' },
+    { id: 16, name: 'Montenegro', group: 'D', flag: 'me' },
     // Group E
-    { id: 17, name: 'Sweden', group: 'E' },
-    { id: 18, name: 'Croatia', group: 'E' },
-    { id: 19, name: 'Netherlands', group: 'E' },
-    { id: 20, name: 'Georgia', group: 'E' },
+    { id: 17, name: 'Sweden', group: 'E', flag: 'se' },
+    { id: 18, name: 'Croatia', group: 'E', flag: 'hr' },
+    { id: 19, name: 'Netherlands', group: 'E', flag: 'nl' },
+    { id: 20, name: 'Georgia', group: 'E', flag: 'ge' },
     // Group F
-    { id: 21, name: 'Iceland', group: 'F' },
-    { id: 22, name: 'Hungary', group: 'F' },
-    { id: 23, name: 'Italy', group: 'F' },
-    { id: 24, name: 'Poland', group: 'F' }
+    { id: 21, name: 'Iceland', group: 'F', flag: 'is' },
+    { id: 22, name: 'Hungary', group: 'F', flag: 'hu' },
+    { id: 23, name: 'Italy', group: 'F', flag: 'it' },
+    { id: 24, name: 'Poland', group: 'F', flag: 'pl' }
 ];
 
 // Fixture Generation
@@ -134,6 +134,7 @@ function renderFixtures() {
                                 <div class="fixture-info">Group ${f.group}</div>
                                 <div class="fixture-teams">
                                     <div class="team-input">
+                                        <img src="https://flagcdn.com/24x18/${t1.flag}.png" class="flag-icon" alt="${t1.name}">
                                         <span class="team-name">${t1.name}</span>
                                         <input type="number" min="0" value="${pred.score1 ?? ''}" oninput="updateScore(${f.id}, 1, this.value)">
                                     </div>
@@ -141,6 +142,7 @@ function renderFixtures() {
                                     <div class="team-input">
                                         <input type="number" min="0" value="${pred.score2 ?? ''}" oninput="updateScore(${f.id}, 2, this.value)">
                                         <span class="team-name">${t2.name}</span>
+                                        <img src="https://flagcdn.com/24x18/${t2.flag}.png" class="flag-icon" alt="${t2.name}">
                                     </div>
                                 </div>
                             </div>
@@ -186,7 +188,10 @@ function updateStandings() {
                             ${sorted.map((t, i) => `
                                 <tr class="${i < 2 ? 'qualifier' : ''}">
                                     <td>${i+1}</td>
-                                    <td class="team-cell">${t.name}</td>
+                                    <td class="team-cell">
+                                        <img src="https://flagcdn.com/16x12/${t.flag}.png" class="flag-icon-small" alt="${t.name}">
+                                        ${t.name}
+                                    </td>
                                     <td>${t.gp}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td>
                                     <td>${t.gf}</td><td>${t.ga}</td><td>${t.gd > 0 ? '+':''}${t.gd}</td>
                                     <td>${t.pts}</td>

@@ -102,6 +102,25 @@ body {
     flex: 1;
 }
 
+.flag-icon {
+    width: 24px;
+    height: 18px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    background-color: #eee;
+}
+
+.flag-icon-small {
+    width: 16px;
+    height: 12px;
+    object-fit: cover;
+    border-radius: 1px;
+    vertical-align: middle;
+    margin-right: 8px;
+    background-color: #eee;
+}
+
 .team-input input {
     width: 60px;
     padding: 8px;
