@@ -96,17 +96,66 @@ const PRELIM_FIXTURES = [
 ];
 
 const MAIN_ROUND_FIXTURES = [
-    // Placeholder logic for Main Round - These would be filled dynamically in a production app
-    // We only add the "template" for the MR fixtures here for simplicity.
-    { id: 701, group: 'MR I', date: '2026-01-21', team1: 'A1', team2: 'B2' },
-    { id: 702, group: 'MR I', date: '2026-01-21', team1: 'B1', team2: 'C2' },
-    { id: 703, group: 'MR I', date: '2026-01-21', team1: 'C1', team2: 'A2' },
-    // Group II
-    { id: 801, group: 'MR II', date: '2026-01-22', team1: 'D1', team2: 'E2' },
-    { id: 802, group: 'MR II', date: '2026-01-22', team1: 'E1', team2: 'F2' },
-    { id: 803, group: 'MR II', date: '2026-01-22', team1: 'F1', team2: 'D2' }
-    // (Additional MR matches would follow standard schedule)
+    // Group I (Teams from A, B, C)
+    // Date: 2026-01-21
+    { id: 701, group: 'MR I', date: '2026-01-21', team1: 'B1', team2: 'C2' },
+    { id: 702, group: 'MR I', date: '2026-01-21', team1: 'C1', team2: 'A2' },
+    { id: 703, group: 'MR I', date: '2026-01-21', team1: 'A1', team2: 'B2' },
+    // Date: 2026-01-23
+    { id: 704, group: 'MR I', date: '2026-01-23', team1: 'B2', team2: 'C2' },
+    { id: 705, group: 'MR I', date: '2026-01-23', team1: 'A1', team2: 'C1' },
+    { id: 706, group: 'MR I', date: '2026-01-23', team1: 'A2', team2: 'B1' },
+    // Date: 2026-01-25
+    { id: 707, group: 'MR I', date: '2026-01-25', team1: 'C1', team2: 'B2' },
+    { id: 708, group: 'MR I', date: '2026-01-25', team1: 'A1', team2: 'B1' },
+    { id: 709, group: 'MR I', date: '2026-01-25', team1: 'A2', team2: 'C2' },
+    // Date: 2026-01-27
+    { id: 710, group: 'MR I', date: '2026-01-27', team1: 'A1', team2: 'C2' },
+    { id: 711, group: 'MR I', date: '2026-01-27', team1: 'A2', team2: 'C1' },
+    { id: 712, group: 'MR I', date: '2026-01-27', team1: 'B1', team2: 'B2' }, // Note: B1 vs B2 is carried over, but schedule often lists 4 new opponents. Actually, they play 4 matches against other group teams.
+    
+    // Correction: In 24-team format, teams play 4 matches in Main Round.
+    // If you are A1, you play B1, B2, C1, C2. You don't play A2.
 ];
+
+// Re-defining MAIN_ROUND_FIXTURES with correct 4-match logic per group
+const MR_I_FIXTURES = [
+    { id: 701, group: 'MR I', date: '2026-01-21', team1: 'A1', team2: 'C2' },
+    { id: 702, group: 'MR I', date: '2026-01-21', team1: 'A2', team2: 'B1' },
+    { id: 703, group: 'MR I', date: '2026-01-21', team1: 'B2', team2: 'C1' },
+
+    { id: 704, group: 'MR I', date: '2026-01-23', team1: 'A1', team2: 'B2' },
+    { id: 705, group: 'MR I', date: '2026-01-23', team1: 'A2', team2: 'C2' },
+    { id: 706, group: 'MR I', date: '2026-01-23', team1: 'B1', team2: 'C1' },
+
+    { id: 707, group: 'MR I', date: '2026-01-25', team1: 'A2', team2: 'B2' },
+    { id: 708, group: 'MR I', date: '2026-01-25', team1: 'A1', team2: 'C1' },
+    { id: 709, group: 'MR I', date: '2026-01-25', team1: 'B1', team2: 'C2' },
+
+    { id: 710, group: 'MR I', date: '2026-01-27', team1: 'A1', team2: 'B1' },
+    { id: 711, group: 'MR I', date: '2026-01-27', team1: 'A2', team2: 'C1' },
+    { id: 712, group: 'MR I', date: '2026-01-27', team1: 'B2', team2: 'C2' }
+];
+
+const MR_II_FIXTURES = [
+    { id: 801, group: 'MR II', date: '2026-01-22', team1: 'D1', team2: 'F2' },
+    { id: 802, group: 'MR II', date: '2026-01-22', team1: 'D2', team2: 'E1' },
+    { id: 803, group: 'MR II', date: '2026-01-22', team1: 'E2', team2: 'F1' },
+
+    { id: 804, group: 'MR II', date: '2026-01-24', team1: 'D1', team2: 'E2' },
+    { id: 805, group: 'MR II', date: '2026-01-24', team1: 'D2', team2: 'F2' },
+    { id: 806, group: 'MR II', date: '2026-01-24', team1: 'E1', team2: 'F1' },
+
+    { id: 807, group: 'MR II', date: '2026-01-26', team1: 'D2', team2: 'E2' },
+    { id: 808, group: 'MR II', date: '2026-01-26', team1: 'D1', team2: 'F1' },
+    { id: 809, group: 'MR II', date: '2026-01-26', team1: 'E1', team2: 'F2' },
+
+    { id: 810, group: 'MR II', date: '2026-01-28', team1: 'D1', team2: 'E1' },
+    { id: 811, group: 'MR II', date: '2026-01-28', team1: 'D2', team2: 'F1' },
+    { id: 812, group: 'MR II', date: '2026-01-28', team1: 'E2', team2: 'F2' }
+];
+
+const MAIN_ROUND_FIXTURES = [...MR_I_FIXTURES, ...MR_II_FIXTURES];
 
 const KNOCKOUT_FIXTURES = [
     { id: 901, stage: 'Placement 5/6', date: '2026-01-30', team1: 'MR1-3', team2: 'MR2-3' },
