@@ -42,7 +42,7 @@ body {
 .date-section {
     background: white;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 0;
     box-shadow: var(--shadow);
 }
 
@@ -63,7 +63,7 @@ body {
 .fixture-card {
     background: var(--bg-color);
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -106,7 +106,7 @@ body {
     width: 24px;
     height: 18px;
     object-fit: cover;
-    border-radius: 2px;
+    border-radius: 0;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     background-color: #eee;
 }
@@ -115,7 +115,7 @@ body {
     width: 16px;
     height: 12px;
     object-fit: cover;
-    border-radius: 1px;
+    border-radius: 0;
     vertical-align: middle;
     margin-right: 8px;
     background-color: #eee;
@@ -125,7 +125,7 @@ body {
     width: 60px;
     padding: 8px;
     border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: 0;
     text-align: center;
     font-weight: bold;
     font-size: 1.1em;
@@ -173,7 +173,7 @@ header h1 {
 
 section {
     background: var(--card-bg);
-    border-radius: 12px;
+    border-radius: 0;
     padding: 25px;
     box-shadow: var(--shadow-lg);
 }
@@ -197,7 +197,7 @@ h2 {
     flex: 1;
     padding: 12px 16px;
     border: 2px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 0;
     font-size: 1em;
     transition: border-color 0.3s;
 }
@@ -212,7 +212,7 @@ h2 {
     color: white;
     border: none;
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 0;
     font-size: 1em;
     font-weight: 600;
     cursor: pointer;
@@ -236,7 +236,7 @@ h2 {
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 8px;
+    border-radius: 0;
     font-size: 0.9em;
     font-weight: 600;
     cursor: pointer;
@@ -253,7 +253,7 @@ h2 {
     color: white;
     border: none;
     padding: 6px 12px;
-    border-radius: 6px;
+    border-radius: 0;
     font-size: 0.85em;
     cursor: pointer;
     transition: all 0.2s;
@@ -274,7 +274,7 @@ h2 {
     align-items: center;
     padding: 12px 16px;
     background: var(--bg-color);
-    border-radius: 8px;
+    border-radius: 0;
     border-left: 4px solid var(--primary-color);
 }
 
@@ -312,7 +312,7 @@ h2 {
 select {
     padding: 12px 16px;
     border: 2px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 0;
     font-size: 1em;
     background: white;
     cursor: pointer;
@@ -334,7 +334,7 @@ select:focus {
     width: 80px;
     padding: 12px;
     border: 2px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 0;
     font-size: 1.2em;
     font-weight: bold;
     text-align: center;
@@ -384,11 +384,11 @@ th {
 }
 
 th:first-child {
-    border-radius: 8px 0 0 0;
+    border-radius: 0;
 }
 
 th:last-child {
-    border-radius: 0 8px 0 0;
+    border-radius: 0;
 }
 
 tbody tr {
@@ -453,7 +453,7 @@ td:first-child {
     align-items: center;
     padding: 16px;
     background: var(--bg-color);
-    border-radius: 8px;
+    border-radius: 0;
     border-left: 4px solid var(--success-color);
 }
 
