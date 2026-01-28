@@ -34,7 +34,9 @@ function loadData() {
 // Add a new team
 function addTeam() {
     const teamNameInput = document.getElementById('teamName');
+    const teamGroupInput = document.getElementById('teamGroup');
     const teamName = teamNameInput.value.trim();
+    const group = teamGroupInput.value;
     
     if (!teamName) {
         alert('Please enter a team name');
@@ -50,6 +52,7 @@ function addTeam() {
     const newTeam = {
         id: Date.now(),
         name: teamName,
+        group: group,
         played: 0,
         wins: 0,
         draws: 0,
@@ -94,9 +97,15 @@ function renderTeamsList() {
         return;
     }
     
-    teamsList.innerHTML = teams.map(team => `
+    // Sort teams by group then name for display
+    const displayTeams = [...teams].sort((a, b) => {
+        if (a.group !== b.group) return a.group.localeCompare(b.group);
+        return a.name.localeCompare(b.name);
+    });
+
+    teamsList.innerHTML = displayTeams.map(team => `
         <div class="team-item">
-            <span class="team-name">${escapeHtml(team.name)}</span>
+            <span class="team-name">[Group ${team.group}] ${escapeHtml(team.name)}</span>
             <button class="btn-remove" onclick="removeTeam(${team.id})">Remove</button>
         </div>
     `).join('');
@@ -221,39 +230,135 @@ function recalculateStandings() {
 
 // Update standings table
 function updateStandings() {
-    const standingsBody = document.getElementById('standingsBody');
+    const groupsContainer = document.getElementById('groupsContainer');
     
     if (teams.length === 0) {
-        standingsBody.innerHTML = '<tr class="empty-state"><td colspan="10">Add teams to start the tournament</td></tr>';
+        groupsContainer.innerHTML = '<p class="empty-state">Add teams to start the tournament</p>';
         return;
     }
     
-    // Sort teams by points, then goal difference, then goals for
-    const sortedTeams = [...teams].sort((a, b) => {
-        if (b.points !== a.points) return b.points - a.points;
-        if (b.goalDifference !== a.goalDifference) return b.goalDifference - a.goalDifference;
-        return b.goalsFor - a.goalsFor;
+    // Group teams by group property
+    const groupedTeams = {};
+    teams.forEach(team => {
+        if (!groupedTeams[team.group]) groupedTeams[team.group] = [];
+        groupedTeams[team.group].push(team);
     });
     
-    standingsBody.innerHTML = sortedTeams.map((team, index) => {
-        const position = index + 1;
-        const positionClass = position <= 3 ? `position-${position}` : '';
+    // Sort group names (A, B, C...)
+    const sortedGroupNames = Object.keys(groupedTeams).sort();
+    
+    groupsContainer.innerHTML = sortedGroupNames.map(groupName => {
+        const groupTeams = groupedTeams[groupName];
+        const sortedTeams = sortTeamsByEHFRules(groupTeams);
         
         return `
-            <tr class="${positionClass}">
-                <td>${position}</td>
-                <td class="team-cell">${escapeHtml(team.name)}</td>
-                <td>${team.played}</td>
-                <td>${team.wins}</td>
-                <td>${team.draws}</td>
-                <td>${team.losses}</td>
-                <td>${team.goalsFor}</td>
-                <td>${team.goalsAgainst}</td>
-                <td>${team.goalDifference > 0 ? '+' : ''}${team.goalDifference}</td>
-                <td><strong>${team.points}</strong></td>
-            </tr>
+            <div class="group-standings">
+                <h3>Group ${groupName}</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Team</th>
+                                <th title="Games Played">GP</th>
+                                <th title="Wins">W</th>
+                                <th title="Draws">D</th>
+                                <th title="Losses">L</th>
+                                <th title="Goals For">GF</th>
+                                <th title="Goals Against">GA</th>
+                                <th title="Goal Difference">GD</th>
+                                <th title="Points">PTS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${sortedTeams.map((team, index) => {
+                                const position = index + 1;
+                                const positionClass = position <= 2 ? 'qualifier' : '';
+                                return `
+                                    <tr class="${positionClass}">
+                                        <td>${position}</td>
+                                        <td class="team-cell">${escapeHtml(team.name)}</td>
+                                        <td>${team.played}</td>
+                                        <td>${team.wins}</td>
+                                        <td>${team.draws}</td>
+                                        <td>${team.losses}</td>
+                                        <td>${team.goalsFor}</td>
+                                        <td>${team.goalsAgainst}</td>
+                                        <td>${team.goalDifference > 0 ? '+' : ''}${team.goalDifference}</td>
+                                        <td><strong>${team.points}</strong></td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         `;
     }).join('');
+}
+
+// Implement EHF tie-breaking rules
+function sortTeamsByEHFRules(teamsToSort) {
+    return [...teamsToSort].sort((a, b) => {
+        // 1. Higher points in all matches
+        if (b.points !== a.points) return b.points - a.points;
+
+        // Teams are level on points. Check head-to-head.
+        // Identify all teams with these points
+        const levelTeams = teamsToSort.filter(t => t.points === a.points);
+        
+        if (levelTeams.length > 1) {
+            const h2hStats = calculateSubStandings(levelTeams);
+            const statsA = h2hStats[a.id];
+            const statsB = h2hStats[b.id];
+
+            // 2. Higher points in head-to-head
+            if (statsB.points !== statsA.points) return statsB.points - statsA.points;
+            
+            // 3. Goal difference in head-to-head
+            if (statsB.gd !== statsA.gd) return statsB.gd - statsA.gd;
+            
+            // 4. Goals scored in head-to-head
+            if (statsB.gf !== statsA.gf) return statsB.gf - statsA.gf;
+        }
+
+        // 5. Overall goal difference in the group
+        if (b.goalDifference !== a.goalDifference) return b.goalDifference - a.goalDifference;
+
+        // 6. Overall goals scored in the group
+        return b.goalsFor - a.goalsFor;
+    });
+}
+
+// Calculate standings using only matches between a subset of teams
+function calculateSubStandings(subsetTeams) {
+    const subsetIds = subsetTeams.map(t => t.id);
+    const stats = {};
+    
+    subsetIds.forEach(id => {
+        stats[id] = { points: 0, gd: 0, gf: 0 };
+    });
+    
+    matches.forEach(match => {
+        if (subsetIds.includes(match.homeTeamId) && subsetIds.includes(match.awayTeamId)) {
+            const home = stats[match.homeTeamId];
+            const away = stats[match.awayTeamId];
+            
+            home.gf += match.homeScore;
+            home.gd += (match.homeScore - match.awayScore);
+            away.gf += match.awayScore;
+            away.gd += (match.awayScore - match.homeScore);
+            
+            if (match.homeScore > match.awayScore) home.points += 2;
+            else if (match.homeScore < match.awayScore) away.points += 2;
+            else {
+                home.points += 1;
+                away.points += 1;
+            }
+        }
+    });
+    
+    return stats;
 }
 
 // Update match history

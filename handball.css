@@ -5,26 +5,68 @@
 }
 
 :root {
-    --primary-color: #2563eb;
-    --primary-dark: #1e40af;
+    --primary-color: #002d72;  /* EHF Navy Blue */
+    --accent-color: #ffcc00;   /* EHF Gold */
+    --primary-dark: #001a4d;
     --danger-color: #dc2626;
     --success-color: #16a34a;
-    --bg-color: #f8fafc;
+    --bg-color: #f0f4f8;
     --card-bg: #ffffff;
     --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --border-color: #e2e8f0;
+    --text-secondary: #475569;
+    --border-color: #cbd5e1;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #001a4d; /* Dark solid background */
     min-height: 100vh;
     padding: 20px;
     color: var(--text-primary);
 }
+
+.groups-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px;
+}
+
+.group-standings {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.group-standings h3 {
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    display: inline-block;
+}
+
+tr.qualifier {
+    background-color: rgba(255, 204, 0, 0.1);
+}
+
+tr.qualifier td:first-child {
+    border-left: 5px solid var(--accent-color);
+}
+
+#teamGroup {
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    background: white;
+}
+
+/* ... existing styles ... */
 
 .container {
     max-width: 1400px;
